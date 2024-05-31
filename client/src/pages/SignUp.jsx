@@ -1,6 +1,6 @@
 import { Link, useNavigate } from "react-router-dom";
 import house_logo from "../assets/house_logo.svg";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
