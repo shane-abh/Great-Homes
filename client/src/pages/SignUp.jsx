@@ -1,7 +1,56 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import house_logo from "../assets/house_logo.svg";
+import { useEffect, useState } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 export default function SignUp() {
+  const [formData, setFormData] = useState({});
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(false);
+  const navigate = useNavigate();
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value,
+    });
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    setLoading(true);
+    const signUpAPIResponse = await fetch("api/auth/signup", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    console.log(signUpAPIResponse);
+
+    if (signUpAPIResponse.status == 200) {
+      const serverResult = await signUpAPIResponse.json();
+      if (serverResult.success === false) {
+        setError(serverResult.message);
+
+        setLoading(false);
+        return;
+      }
+
+      setLoading(false);
+      setError(null);
+      toast.success("Account created successfully");
+      navigate("/signin");
+    } else {
+      toast.error(
+        signUpAPIResponse.status + " " + signUpAPIResponse.statusText
+      );
+    }
+  };
+
   return (
     <div className="bg-white max-w-screen-xl mx-auto  p-5 sm:p-8 md:px-20 lg:p-0">
       <div className="lg:p-5  flex flex-col-reverse lg:flex-row justify-center items-center">
@@ -90,35 +139,62 @@ export default function SignUp() {
             </h1>
 
             {/* Inputs  */}
-            <div className="flex-col  justify-center  items-center   lg:mt-10">
-			<input
-                className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
-                placeholder="Username"
-                type="text"
-              />
-              <input
-                className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
-                placeholder="Email"
-                type="email"
-              />
-              <input
-                className="bg-white  mb-0 md:my-4 p-2 w-full rounded-lg"
-                placeholder="Password"
-                type="password"
-              />
-            </div>
-            
+            <form onSubmit={handleSubmit}>
+              <div className="flex-col  justify-center  items-center   lg:mt-10">
+                <input
+                  className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
+                  placeholder="Username"
+                  type="text"
+                  name="username"
+                  id="username"
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
+                  placeholder="Email"
+                  type="email"
+                  name="email"
+                  id="email"
+                  onChange={handleChange}
+                  required
+                />
+                <input
+                  className="bg-white  mb-0 md:my-4 p-2 w-full rounded-lg"
+                  placeholder="Password"
+                  type="password"
+                  name="password"
+                  id="password"
+                  onChange={handleChange}
+                  required
+                />
+              </div>
 
-            {/* Buttons */}
+              {/* Buttons */}
 
-            <div className="mt-5 ">
-              <button
-                type="button"
-                className="focus:outline-none w-full text-buttonSecondaryTextColor bg-buttonSecondaryColor hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
-              >
-                Sign Up
-              </button>
-            </div>
+              <div className="mt-5 ">
+                <input
+                  className="focus:outline-none w-full text-buttonSecondaryTextColor bg-buttonSecondaryColor hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                  type="submit"
+                  value={loading ? "Loading..." : "Sign Up"}
+                />
+              </div>
+            </form>
+
+            <span className="text-red-700">{error}</span>
+            <ToastContainer
+              position="top-center"
+              autoClose={5000}
+              hideProgressBar={false}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              theme="dark"
+            />
+            {/* {error ?toast.error(error) : toast.success("User Created Successfully ")} */}
 
             <div className=" flex w-full my-5 items-center ">
               <hr className="w-1/3 h-0.5 mx-auto  bg-gray-100 border-0 rounded " />
