@@ -2,12 +2,14 @@ import { Link, useNavigate } from "react-router-dom";
 import house_logo from "../assets/house_logo.svg";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import {signInStart, signInFailure, signInSuccess} from '../redux/user/userSlice'
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const [loading, setLoading] = useState(false);
-  const [error, setError] = useState(false);
+  const {loading, error} = useSelector((state) => state.user)
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleChange = (e) => {
     setFormData({
@@ -19,8 +21,8 @@ export default function SignIn() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    setLoading(true);
-    const signUpAPIResponse = await fetch("api/auth/signup", {
+    dispatch(signInStart);
+    const signUpAPIResponse = await fetch("api/auth/signin", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -30,20 +32,21 @@ export default function SignIn() {
 
     console.log(signUpAPIResponse);
 
+
     if (signUpAPIResponse.status == 200) {
       const serverResult = await signUpAPIResponse.json();
+      console.log(serverResult)
       if (serverResult.success === false) {
-        setError(serverResult.message);
-
-        setLoading(false);
+       dispatch(signInFailure(serverResult.message))
+      
         return;
       }
 
-      setLoading(false);
-      setError(null);
+     dispatch(signInSuccess(serverResult));
       toast.success("Account created successfully");
-      navigate("/signin");
+      navigate("/");
     } else {
+      dispatch(signInFailure("Something went wrong"))
       toast.error(
         signUpAPIResponse.status + " " + signUpAPIResponse.statusText
       );

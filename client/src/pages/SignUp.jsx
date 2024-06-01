@@ -31,7 +31,7 @@ export default function SignUp() {
 
     console.log(signUpAPIResponse);
 
-    if (signUpAPIResponse.status == 200) {
+    if (signUpAPIResponse.status == 201) {
       const serverResult = await signUpAPIResponse.json();
       if (serverResult.success === false) {
         setError(serverResult.message);
