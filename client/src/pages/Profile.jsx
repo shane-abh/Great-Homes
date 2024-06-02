@@ -7,6 +7,10 @@ import {
   updateUserStart,
   updateUserSuccess,
   updateUserFailure,
+  deleteUserFailure,
+  deleteUserSuccess,
+  deleteUserStart,
+  signOutUserStart,
 } from "../redux/user/userSlice.js";
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
@@ -58,13 +62,45 @@ export default function Profile() {
     }
   };
 
-  if(error){
-	toast.error(error)
+  if (error) {
+    toast.error(error);
   }
 
-  if(updateSuccess){
-	toast.success("User updated successfully")
+  if (updateSuccess) {
+    toast.success("User updated successfully");
   }
+
+  const handleDeleteUser = async () => {
+    try {
+      dispatch(deleteUserStart());
+      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
+        method: "DELETE",
+      });
+      const data = await res.json();
+      if (data.success === false) {
+        dispatch(deleteUserFailure(data.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(data));
+    } catch (error) {
+      dispatch(deleteUserFailure(error.message));
+    }
+  };
+
+  const handleSignOut = async () => {
+    try {
+      dispatch(signOutUserStart());
+      const signoutRequest = await fetch('/api/auth/signout');
+      const signoutResponse = await signoutRequest.json();
+      if (signoutResponse.success === false) {
+        dispatch(deleteUserFailure(signoutResponse.message));
+        return;
+      }
+      dispatch(deleteUserSuccess(signoutResponse));
+    } catch (error) {
+      dispatch(deleteUserFailure(signoutResponse.message));
+    }
+  };
 
   return (
     <div className=" w-[90vw] sm:w-[70vw] md:w-[50vw] mx-auto my-[2vh]">
@@ -142,13 +178,12 @@ export default function Profile() {
           pauseOnHover
           theme="dark"
         />
-        
 
         <div className="w-full flex md:flex-row flex-col  justify-between text-white text-sm font-bold md:px-2 mt-8">
-          <button className="bg-[#F52314] my-4 md:my-0 p-2 rounded-md">
+          <button onClick={handleDeleteUser} className="bg-[#F52314] my-4 md:my-0 p-2 rounded-md">
             Delete Account
           </button>
-          <button className="bg-[#7e2d21] p-2 rounded-md">Sign Out</button>
+          <button onClick={handleSignOut} className="bg-[#7e2d21] p-2 rounded-md">Sign Out</button>
         </div>
       </div>
     </div>
