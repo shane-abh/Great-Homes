@@ -8,6 +8,7 @@ export default {
     extend: {
       colors: {
         "primary": "#012865",
+        "secondary": "#E8C06F",
         "loginBox": "#012865",
         "buttonSecondaryColor": "#E8C06F",
         "buttonSecondaryTextColor": "#102339"
