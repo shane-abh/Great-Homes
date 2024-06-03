@@ -4,6 +4,7 @@ import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {signInStart, signInFailure, signInSuccess} from '../redux/user/userSlice'
+import OAuth from "../../OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -197,7 +198,7 @@ export default function SignIn() {
             </div>
 
             <div className=" flex justify-center items-center  my-6 ">
-              <button
+              {/* <button onclick="handleGoogleClick"
                 type="button"
                 className="text-black  w-full bg-white hover:bg-white/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
               >
@@ -226,7 +227,8 @@ export default function SignIn() {
                   ></path>
                 </svg>
                 Sign in with Google
-              </button>
+              </button> */}
+            <OAuth></OAuth>
             </div>
             <div>
               <p className="text-white text-center">
