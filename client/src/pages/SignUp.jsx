@@ -3,6 +3,7 @@ import house_logo from "../assets/house_logo.svg";
 import {  useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import OAuth from "../../OAuth";
 
 export default function SignUp() {
   const [formData, setFormData] = useState({});
@@ -203,7 +204,7 @@ export default function SignUp() {
             </div>
 
             <div className=" flex justify-center items-center  my-6 ">
-              <button
+              {/* <button
                 type="button"
                 className="text-black  w-full bg-white hover:bg-white/90 focus:ring-4 focus:outline-none focus:ring-[#4285F4]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center flex justify-center items-center dark:focus:ring-[#4285F4]/55 me-2 mb-2"
               >
@@ -232,8 +233,10 @@ export default function SignUp() {
                   ></path>
                 </svg>
                 Continue with Google
-              </button>
+              </button> */}
+              <OAuth></OAuth>
             </div>
+            
             <div>
               <p className="text-white text-center">
                 Have an account?{" "}
