@@ -1,48 +1,8 @@
-import { FaSearch } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 export default function Header() {
   return (
     <header className="bg-slate-200 shadow-md">
-      {/* <div className="flex justify-between items-center max-w-6xl mx-auto p-3">
-				<Link to="/">
-					{" "}
-					<h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-						<span className="text-slate-500">Great</span>
-						<span className="text-slate-700">Homes</span>
-					</h1>
-				</Link>
-
-				<form className="bg-slate-100 p-3 rounded-lg flex items-center">
-					<input
-						type="text"
-						placeholder="Search..."
-						className="bg-trasparent w-24 sm:w-64 focus:outline-none"
-					/>
-					<FaSearch className="text-slate-600" />
-				</form>
-				<ul className="flex gap-4">
-					<Link to="/">
-						{" "}
-						<li className="hidden sm:inline text-slate-700 hover:underline">
-							Home
-						</li>
-					</Link>
-					<Link to="/about">
-						{" "}
-						<li className="hidden sm:inline text-slate-700 hover:underline">
-							About
-						</li>
-					</Link>
-					<Link to="/signIn">
-						{" "}
-						<li className="sm:inline text-slate-700 hover:underline">
-							Sign In
-						</li>
-					</Link>
-				</ul>
-			</div> */}
-
       <nav className="bg-primary border-gray-200 ">
         <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
           <h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
@@ -179,6 +139,14 @@ export default function Header() {
                 >
                   Services
                 </a>
+              </li>
+              <li>
+                <Link
+                  to={"/Profile"}
+                  className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                >
+                  Profile
+                </Link>
               </li>
             </ul>
           </div>

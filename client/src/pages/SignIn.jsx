@@ -3,12 +3,16 @@ import house_logo from "../assets/house_logo.svg";
 import { useState } from "react";
 import { ToastContainer, toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import {signInStart, signInFailure, signInSuccess} from '../redux/user/userSlice'
+import {
+  signInStart,
+  signInFailure,
+  signInSuccess,
+} from "../redux/user/userSlice";
 import OAuth from "../../OAuth";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
-  const {loading, error} = useSelector((state) => state.user)
+  const { loading, error } = useSelector((state) => state.user);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -33,21 +37,20 @@ export default function SignIn() {
 
     console.log(signUpAPIResponse);
 
-
     if (signUpAPIResponse.status == 200) {
       const serverResult = await signUpAPIResponse.json();
-      console.log(serverResult)
+      console.log(serverResult);
       if (serverResult.success === false) {
-       dispatch(signInFailure(serverResult.message))
-      
+        dispatch(signInFailure(serverResult.message));
+
         return;
       }
 
-     dispatch(signInSuccess(serverResult));
+      dispatch(signInSuccess(serverResult));
       toast.success("Account created successfully");
       navigate("/");
     } else {
-      dispatch(signInFailure("Something went wrong"))
+      dispatch(signInFailure("Something went wrong"));
       toast.error(
         signUpAPIResponse.status + " " + signUpAPIResponse.statusText
       );
@@ -174,7 +177,7 @@ export default function SignIn() {
                   type="submit"
                   className="focus:outline-none w-full text-buttonSecondaryTextColor bg-buttonSecondaryColor hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
                 >
-                 {loading ? "Loading..." : "Sign In"}
+                  {loading ? "Loading..." : "Sign In"}
                 </button>
               </div>
             </form>
@@ -228,11 +231,11 @@ export default function SignIn() {
                 </svg>
                 Sign in with Google
               </button> */}
-            <OAuth></OAuth>
+              <OAuth></OAuth>
             </div>
             <div>
               <p className="text-white text-center">
-                Don't have an account?{" "}
+                Dont have an account?{" "}
                 <Link to="/signup" className="text-[#4285F4]">
                   Sign up
                 </Link>

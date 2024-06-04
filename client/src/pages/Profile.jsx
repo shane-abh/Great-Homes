@@ -1,7 +1,7 @@
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 
 import user_avatar from "../assets/user_avatar.svg";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import {
   updateUserStart,
@@ -12,24 +12,20 @@ import {
   deleteUserStart,
   signOutUserStart,
 } from "../redux/user/userSlice.js";
+
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
+import { handleApiRequest } from "../util/handleApiRequest.js";
 
 export default function Profile() {
   const [formData, setFormData] = useState({});
-  const fileRef = useRef(null);
-  const [file, setFile] = useState(null);
+
   const [updateSuccess, setUpdateSuccess] = useState(false);
   const { currentUser, loading, error } = useSelector((state) => state.user);
+
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    if (file) {
-      handleFileUpload(file);
-    }
-  }, [file]);
-
-  const handleFileUpload = (file) => {};
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({
@@ -40,66 +36,56 @@ export default function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    try {
-      dispatch(updateUserStart());
-      const updateRequest = await fetch(`api/user/update/${currentUser._id}`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
-      const updateResponse = await updateRequest.json();
-      if (updateResponse.success == false) {
-        dispatch(updateUserFailure(updateResponse.message));
-        return;
-      }
-
-      dispatch(updateUserSuccess(updateResponse));
-      setUpdateSuccess(true);
-    } catch (error) {
-      dispatch(updateUserFailure(error.message));
-    }
+    await handleApiRequest(
+      dispatch,
+      navigate,
+      `api/user/update/${currentUser._id}`,
+      "POST",
+      updateUserStart,
+      updateUserSuccess,
+      updateUserFailure,
+      null,
+      { "Content-Type": "application/json" },
+      formData
+    );
+    setUpdateSuccess(true);
   };
 
   if (error) {
     toast.error(error);
   }
 
-  if (updateSuccess) {
-    toast.success("User updated successfully");
-  }
+  useEffect(() => {
+    if (updateSuccess) {
+      toast.success("User updated successfully");
+      setUpdateSuccess(false); // Reset the state if needed
+    }
+  }, [updateSuccess]);
 
   const handleDeleteUser = async () => {
-    try {
-      dispatch(deleteUserStart());
-      const res = await fetch(`/api/user/delete/${currentUser._id}`, {
-        method: "DELETE",
-      });
-      const data = await res.json();
-      if (data.success === false) {
-        dispatch(deleteUserFailure(data.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(data));
-    } catch (error) {
-      dispatch(deleteUserFailure(error.message));
-    }
+    await handleApiRequest(
+      dispatch,
+      navigate,
+      `/api/user/delete/${currentUser._id}`,
+      "DELETE",
+      deleteUserStart,
+      deleteUserSuccess,
+      deleteUserFailure,
+      "/signin"
+    );
   };
 
   const handleSignOut = async () => {
-    try {
-      dispatch(signOutUserStart());
-      const signoutRequest = await fetch('/api/auth/signout');
-      const signoutResponse = await signoutRequest.json();
-      if (signoutResponse.success === false) {
-        dispatch(deleteUserFailure(signoutResponse.message));
-        return;
-      }
-      dispatch(deleteUserSuccess(signoutResponse));
-    } catch (error) {
-      dispatch(deleteUserFailure(signoutResponse.message));
-    }
+   await handleApiRequest(
+      dispatch,
+      navigate,
+      "/api/auth/signout",
+      "GET",  // Assuming signout uses POST, change if necessary
+      signOutUserStart,
+      deleteUserSuccess,
+      deleteUserFailure,
+      "/signin"
+    );
   };
 
   return (
@@ -108,24 +94,17 @@ export default function Profile() {
         <h1 className="text-white text-center text-2xl md:text-3xl font-semibold my-4 mb8">
           Profile
         </h1>
-
-        <div className="flex justify-center">
-          <input
-            type="file"
-            ref={fileRef}
-            onClick={(e) => setFile(e.target.files[0])}
-            hidden
-            accept="image/*"
-          />
-          <img
-            onClick={() => fileRef.current.click()}
-            src={user_avatar}
-            className="w-30  my-5 w-1/2 md:w-1/5  xl:w-[5vw]"
-          />
-        </div>
-
-        {/* Inputs  */}
         <form onSubmit={handleSubmit}>
+          <div className="flex justify-center">
+            <img
+              src={user_avatar}
+              alt="Profile Image"
+              className="w-30  my-5 w-1/2 md:w-1/5  xl:w-[5vw]"
+            />
+          </div>
+
+          {/* Inputs  */}
+
           <div className="flex-col  justify-center  items-center   lg:mt-10">
             <input
               className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
@@ -180,10 +159,18 @@ export default function Profile() {
         />
 
         <div className="w-full flex md:flex-row flex-col  justify-between text-white text-sm font-bold md:px-2 mt-8">
-          <button onClick={handleDeleteUser} className="bg-[#F52314] my-4 md:my-0 p-2 rounded-md">
+          <button
+            onClick={handleDeleteUser}
+            className="bg-[#F52314] my-4 md:my-0 p-2 rounded-md"
+          >
             Delete Account
           </button>
-          <button onClick={handleSignOut} className="bg-[#7e2d21] p-2 rounded-md">Sign Out</button>
+          <button
+            onClick={handleSignOut}
+            className="bg-[#7e2d21] p-2 rounded-md"
+          >
+            Sign Out
+          </button>
         </div>
       </div>
     </div>
