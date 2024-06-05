@@ -46,7 +46,8 @@ export default function Profile() {
       updateUserFailure,
       null,
       { "Content-Type": "application/json" },
-      formData
+      formData,
+      "Wrong Credentials. Please try Again"
     );
     setUpdateSuccess(true);
   };
@@ -71,16 +72,17 @@ export default function Profile() {
       deleteUserStart,
       deleteUserSuccess,
       deleteUserFailure,
-      "/signin"
+      "/signin",
+      
     );
   };
 
   const handleSignOut = async () => {
-   await handleApiRequest(
+    await handleApiRequest(
       dispatch,
       navigate,
       "/api/auth/signout",
-      "GET",  // Assuming signout uses POST, change if necessary
+      "GET", // Assuming signout uses POST, change if necessary
       signOutUserStart,
       deleteUserSuccess,
       deleteUserFailure,
