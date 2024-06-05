@@ -1,7 +1,7 @@
 import { Link, useNavigate } from "react-router-dom";
 import house_logo from "../assets/house_logo.svg";
 import { useState } from "react";
-import { ToastContainer, toast } from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import {
   signInStart,
@@ -9,6 +9,7 @@ import {
   signInSuccess,
 } from "../redux/user/userSlice";
 import OAuth from "../../OAuth";
+import { handleApiRequest } from "../util/handleApiRequest";
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -25,36 +26,18 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    dispatch(signInStart);
-    const signUpAPIResponse = await fetch("api/auth/signin", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(formData),
-    });
-
-    console.log(signUpAPIResponse);
-
-    if (signUpAPIResponse.status == 200) {
-      const serverResult = await signUpAPIResponse.json();
-      console.log(serverResult);
-      if (serverResult.success === false) {
-        dispatch(signInFailure(serverResult.message));
-
-        return;
-      }
-
-      dispatch(signInSuccess(serverResult));
-      toast.success("Account created successfully");
-      navigate("/");
-    } else {
-      dispatch(signInFailure("Something went wrong"));
-      toast.error(
-        signUpAPIResponse.status + " " + signUpAPIResponse.statusText
-      );
-    }
+    await handleApiRequest(
+      dispatch,
+      navigate,
+      `api/auth/signin`,
+      "POST",
+      signInStart,
+      signInSuccess,
+      signInFailure,
+      "/",
+      { "Content-Type": "application/json" },
+      formData
+    );
   };
 
   return (
@@ -79,7 +62,6 @@ export default function SignIn() {
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                  
                 </a>
               </div>
               <div className="col-span-2 sm:col-span-1 md:col-span-2 bg-stone-50">
@@ -93,7 +75,6 @@ export default function SignIn() {
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                 
                 </a>
                 <div className="grid gap-4 grid-cols-1">
                   <a
@@ -106,7 +87,6 @@ export default function SignIn() {
                       className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                     />
                     <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                  
                   </a>
                 </div>
               </div>
@@ -121,7 +101,6 @@ export default function SignIn() {
                     className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
                   />
                   <div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
-                  
                 </a>
               </div>
             </div>
