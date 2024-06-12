@@ -16,6 +16,7 @@ import {
 import { useDispatch } from "react-redux";
 import { ToastContainer, toast } from "react-toastify";
 import { handleApiRequest } from "../util/handleApiRequest.js";
+import { Link } from 'react-router-dom';
 
 export default function Profile() {
   const [formData, setFormData] = useState({});
@@ -141,12 +142,18 @@ export default function Profile() {
           <div className="mt-5 ">
             <input
               disabled={loading}
-              className="focus:outline-none w-full text-primary bg-secondary  font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+              className="focus:outline-none w-full text-primary bg-secondary  font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:focus:ring-yellow-900"
               type="submit"
               value={loading ? "Loading..." : "Update Profile"}
             />
           </div>
+
+          <Link className='bg-green-700 text-white p-3 rounded-lg uppercase text-center hover:opacity-95 ' to={"/create-listing"}>
+          Create Listing
+        </Link>
+
         </form>
+        
         <ToastContainer
           position="top-center"
           autoClose={5000}
@@ -173,6 +180,7 @@ export default function Profile() {
           >
             Sign Out
           </button>
+          
         </div>
       </div>
     </div>
