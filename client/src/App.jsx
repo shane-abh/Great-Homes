@@ -6,23 +6,28 @@ import SignIn from "./pages/SignIn";
 import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import CreateListing from './pages/CreateListing';
+import CreateListing from "./pages/CreateListing";
+import UpdateListing from "./pages/UpdateListing";
 
 export default function App() {
-  return (
-    <BrowserRouter>
-      <Header />
-      <div className="main-content">
-        <Routes>
-          <Route path="/" element={<Home />}></Route>
-          <Route path="/About" element={<About />}></Route>
-          <Route path="/SignUp" element={<SignUp />}></Route>
-          <Route path="/SignIn" element={<SignIn />}></Route>
-          <Route path="/Profile" element={<Profile />}></Route>
-          <Route path='/create-listing' element={<CreateListing />} />
-        </Routes>
-      </div>
-      <Footer />
-    </BrowserRouter>
-  );
+	return (
+		<BrowserRouter>
+			<Header />
+			<div className="main-content">
+				<Routes>
+					<Route path="/" element={<Home />}></Route>
+					<Route path="/About" element={<About />}></Route>
+					<Route path="/SignUp" element={<SignUp />}></Route>
+					<Route path="/SignIn" element={<SignIn />}></Route>
+					<Route path="/Profile" element={<Profile />}></Route>
+					<Route path="/create-listing" element={<CreateListing />} />
+					<Route
+						path="/update-listing/:listingId"
+						element={<UpdateListing />}
+					/>
+				</Routes>
+			</div>
+			<Footer />
+		</BrowserRouter>
+	);
 }
