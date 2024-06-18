@@ -10,6 +10,11 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../../OAuth";
 import { handleApiRequest } from "../util/handleApiRequest";
+import CryptoJS from 'crypto-js';
+
+const encryptData = (data) => {
+  return CryptoJS.AES.encrypt(JSON.stringify(data), import.meta.env.VITE_SECRET_KEY).toString();
+};
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -26,6 +31,9 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const encryptFormData = encryptData(formData);
+
     await handleApiRequest(
       dispatch,
       navigate,
@@ -36,7 +44,7 @@ export default function SignIn() {
       signInFailure,
       "/",
       { "Content-Type": "application/json" },
-      formData
+      {data: encryptFormData}
     );
   };
 
