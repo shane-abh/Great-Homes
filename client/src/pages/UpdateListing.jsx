@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	getDownloadURL,
 	getStorage,
@@ -7,11 +7,12 @@ import {
 } from "firebase/storage";
 import { app } from "../firebase";
 import { useSelector } from "react-redux";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 export default function CreateListing() {
 	const { currentUser } = useSelector((state) => state.user);
 	const navigate = useNavigate();
+	const params = useParams();
 	const [files, setFiles] = useState([]);
 	const [formData, setFormData] = useState({
 		imageUrls: [],
@@ -31,7 +32,21 @@ export default function CreateListing() {
 	const [uploading, setUploading] = useState(false);
 	const [error, setError] = useState(false);
 	const [loading, setLoading] = useState(false);
-	console.log(formData);
+
+	useEffect(() => {
+		const fetchListing = async () => {
+			const listingId = params.listingId;
+			const res = await fetch(`/api/listing/get/${listingId}`);
+			const data = await res.json();
+			if (data.success === false) {
+				console.log(data.message);
+				return;
+			}
+			setFormData(data);
+		};
+
+		fetchListing();
+	}, []);
 
 	const handleImageSubmit = (e) => {
 		if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
@@ -104,6 +119,7 @@ export default function CreateListing() {
 				type: e.target.id,
 			});
 		}
+
 		if (
 			e.target.id === "parking" ||
 			e.target.id === "furnished" ||
@@ -114,6 +130,7 @@ export default function CreateListing() {
 				[e.target.id]: e.target.checked,
 			});
 		}
+
 		if (
 			e.target.type === "number" ||
 			e.target.type === "text" ||
@@ -129,18 +146,16 @@ export default function CreateListing() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 		try {
-			if (formData.imageUrls.length < 1) {
-				return setError(`You must upload atleast one image`);
-			}
-			if (+formData.regularPrice < +formData.discountPrice) {
+			if (formData.imageUrls.length < 1)
+				return setError("You must upload at least one image");
+			if (+formData.regularPrice < +formData.discountPrice)
 				return setError(
-					`Discount price must be lower than regular price`
+					"Discount price must be lower than regular price"
 				);
-			}
 			setLoading(true);
 			setError(false);
-			const res = await fetch("/api/listing/create", {
-				method: "post",
+			const res = await fetch(`/api/listing/update/${params.listingId}`, {
+				method: "POST",
 				headers: {
 					"Content-Type": "application/json",
 				},
@@ -160,11 +175,10 @@ export default function CreateListing() {
 			setLoading(false);
 		}
 	};
-
 	return (
 		<main className="p-3 max-w-4xl mx-auto">
 			<h1 className="text-3xl font-semibold text-center my-7">
-				Create a Listing
+				Update a Listing
 			</h1>
 			<form
 				onSubmit={handleSubmit}
@@ -284,7 +298,7 @@ export default function CreateListing() {
 								type="number"
 								id="regularPrice"
 								min="50"
-								max="1000000"
+								max="10000000"
 								required
 								className="p-3 border border-gray-300 rounded-lg"
 								onChange={handleChange}
@@ -292,7 +306,9 @@ export default function CreateListing() {
 							/>
 							<div className="flex flex-col items-center">
 								<p>Regular price</p>
-								<span className="text-xs">($ / month)</span>
+								{formData.type === "rent" && (
+									<span className="text-xs">($ / month)</span>
+								)}
 							</div>
 						</div>
 						{formData.offer && (
@@ -301,7 +317,7 @@ export default function CreateListing() {
 									type="number"
 									id="discountPrice"
 									min="0"
-									max="1000000"
+									max="10000000"
 									required
 									className="p-3 border border-gray-300 rounded-lg"
 									onChange={handleChange}
@@ -309,7 +325,11 @@ export default function CreateListing() {
 								/>
 								<div className="flex flex-col items-center">
 									<p>Discounted price</p>
-									<span className="text-xs">($ / month)</span>
+									{formData.type === "rent" && (
+										<span className="text-xs">
+											($ / month)
+										</span>
+									)}
 								</div>
 							</div>
 						)}
@@ -367,7 +387,7 @@ export default function CreateListing() {
 						disabled={loading || uploading}
 						className="p-3 bg-slate-700 text-white rounded-lg uppercase hover:opacity-95 disabled:opacity-80"
 					>
-						{loading ? "Creating" : "Create Listing"}
+						{loading ? "Updating..." : "Update listing"}
 					</button>
 					{error && <p className="text-red-700 text-sm">{error}</p>}
 				</div>
