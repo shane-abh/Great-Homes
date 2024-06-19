@@ -2,10 +2,10 @@ import Listing from "../models/lisitng.model.js";
 import { errorHandler } from "../utils/error.js";
 
 export const createListing = async (req, res, next) => {
-  const errors = validationResult(req);
-  if (!errors.isEmpty()) {
-    return res.status(400).json({ errors: errors.array() });
-  }
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
 
   try {
     const listing = await Listing.create(req.body);

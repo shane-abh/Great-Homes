@@ -1,10 +1,11 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-// import { Swiper, SwiperSlide } from 'swiper/react';
+import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation } from 'swiper/modules';
 import SwiperCore from 'swiper';
 import 'swiper/css/bundle';
 import ListingItem from '../components/ListingItem';
+import hero from '../assets/hero-house.jpg';
 
 export default function Home() {
   const [offerListings, setOfferListings] = useState([]);
@@ -48,13 +49,19 @@ export default function Home() {
   return (
     <div>
       {/* top */}
-      <div className='flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto'>
-        <h1 className='text-slate-700 font-bold text-3xl lg:text-6xl'>
-          Find your next <span className='text-slate-500'>perfect</span>
+      <div className="relative">
+      <div
+        className="absolute inset-0 bg-cover bg-center "
+        style={{ backgroundImage: `url(${hero})`, zIndex: -1, backgroundColor: 'black' }}
+      ></div>
+      <div className="absolute inset-0 bg-black opacity-60"></div>
+      <div className="relative flex flex-col gap-6 p-28 px-3 max-w-6xl mx-auto z-10 text-white">
+        <h1 className="text-3xl lg:text-6xl">
+          Find your next <span className="text-[#D98B0B]">perfect</span>
           <br />
           place with ease
         </h1>
-        <div className='text-gray-400 text-xs sm:text-sm'>
+        <div className="text-xs sm:text-sm">
           Great Homes is the best place to find your next perfect place to
           live.
           <br />
@@ -62,12 +69,12 @@ export default function Home() {
         </div>
         <Link
           to={'/search'}
-          className='text-xs sm:text-sm text-blue-800 font-bold hover:underline'
+          className="text-xs sm:text-sm font-bold hover:underline"
         >
           Let's get started...
         </Link>
       </div>
-
+    </div>
       {/* swiper */}
       {/* <Swiper navigation>
         {offerListings &&
