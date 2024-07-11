@@ -1,5 +1,5 @@
 import express from 'express';
-import { createListing, deleteListing, updateListing, getListing, getListings, getAll } from '../controllers/listing.controller.js';
+import { createListing, deleteListing, updateListing, getListing, getListings, getAll, getMortgageCalculations } from '../controllers/listing.controller.js';
 import { verifyToken } from '../utils/verifyUser.js';
 import { body, validationResult } from 'express-validator';
 
@@ -17,5 +17,7 @@ router.post('/update/:id', verifyToken, updateListing);
 router.get('/get/:id', getListing);
 router.get('/get', getListings);
 router.get('/getAll', getAll);
+router.post('/getMortgageCalculations', getMortgageCalculations);
+
 
 export default router;
