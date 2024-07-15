@@ -3,7 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import ListingItem from '../components/ListingItem';
 
 export default function Search() {
-  const navigate = useNavigate();
+  const navigate = useNavigate(); // Hook for navigation
   const [sidebardata, setSidebardata] = useState({
     searchTerm: '',
     type: 'all',
@@ -14,12 +14,12 @@ export default function Search() {
     order: 'desc',
   });
 
-  const [loading, setLoading] = useState(false);
-  const [listings, setListings] = useState([]);
-  const [showMore, setShowMore] = useState(false);
+  const [loading, setLoading] = useState(false); // Loading state
+  const [listings, setListings] = useState([]); // Listings state
+  const [showMore, setShowMore] = useState(false); // Show more state
 
   useEffect(() => {
-    const urlParams = new URLSearchParams(location.search);
+    const urlParams = new URLSearchParams(location.search); // Parse URL parameters
     const searchTermFromUrl = urlParams.get('searchTerm');
     const typeFromUrl = urlParams.get('type');
     const parkingFromUrl = urlParams.get('parking');
@@ -28,6 +28,7 @@ export default function Search() {
     const sortFromUrl = urlParams.get('sort');
     const orderFromUrl = urlParams.get('order');
 
+    // Update state based on URL parameters
     if (
       searchTermFromUrl ||
       typeFromUrl ||
@@ -47,26 +48,27 @@ export default function Search() {
         order: orderFromUrl || 'desc',
       });
     }
-
+    // Fetch listings based on updated state
     const fetchListings = async () => {
       setLoading(true);
       setShowMore(false);
-      const searchQuery = urlParams.toString();
-      const res = await fetch(`/api/listing/get?${searchQuery}`);
+      const searchQuery = urlParams.toString(); // Create query string from URL parameters
+      const res = await fetch(`/api/listing/get?${searchQuery}`); // Fetch listings from API
       const data = await res.json();
       if (data.length > 8) {
-        setShowMore(true);
+        setShowMore(true); // Show "show more" button if there are more than 8 listings
       } else {
         setShowMore(false);
       }
-      setListings(data);
+      setListings(data); // Update listings state
       setLoading(false);
     };
 
-    fetchListings();
+    fetchListings(); // Run effect when location.search changes
   }, [location.search]);
 
   const handleChange = (e) => {
+    // Update state based on form input changes
     if (
       e.target.id === 'all' ||
       e.target.id === 'rent' ||
@@ -111,7 +113,7 @@ export default function Search() {
     urlParams.set('sort', sidebardata.sort);
     urlParams.set('order', sidebardata.order);
     const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    navigate(`/search?${searchQuery}`); // Navigate to search URL with query string
   };
 
   const onShowMoreClick = async () => {
@@ -120,7 +122,7 @@ export default function Search() {
     const urlParams = new URLSearchParams(location.search);
     urlParams.set('startIndex', startIndex);
     const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    const res = await fetch(`/api/listing/get?${searchQuery}`); // Fetch more listings from API
     const data = await res.json();
     if (data.length < 9) {
       setShowMore(false);
