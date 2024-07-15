@@ -1,8 +1,27 @@
-import { useSelector } from "react-redux";
-import { Link } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import { signOutUserStart, deleteUserSuccess, deleteUserFailure } from "../redux/user/userSlice.js";
+import { handleApiRequest } from "../util/handleApiRequest.js";
 
 export default function Header() {
   const { currentUser } = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const handleSignOut = async () => {
+    await handleApiRequest(
+      dispatch,
+      navigate,
+      "/api/auth/signout",
+      "GET",
+      signOutUserStart,
+      deleteUserSuccess,
+      deleteUserFailure,
+      "/signin"
+    );
+  };
+
   return (
     <header className="bg-slate-200 shadow-md">
       <nav className="bg-primary border-gray-200 ">
@@ -142,6 +161,16 @@ export default function Header() {
                   Services
                 </a>
               </li>
+              {!currentUser && location.pathname !== '/signin' && (
+                <li>
+                  <Link
+                    to="/signin"
+                    className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
               {currentUser && (
                 <>
                   <li>
@@ -154,11 +183,19 @@ export default function Header() {
                   </li>
                   <li>
                     <Link
-                      to={"/myLisitngs"}
+                      to={"/myListings"}
                       className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
                     >
                       My Listings
                     </Link>
+                  </li>
+                  <li>
+                    <button
+                      onClick={handleSignOut}
+                      className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 dark:text-white md:dark:hover:text-blue-500 dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+                    >
+                      Sign Out
+                    </button>
                   </li>
                 </>
               )}
