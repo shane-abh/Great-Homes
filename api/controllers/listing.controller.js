@@ -116,13 +116,13 @@ export const getListings = async (req, res, next) => {
       .limit(limit)
       .skip(startIndex);
 
-      if(listings){
-        return res.status(200).json(listings);
-      }else{
-        return res.status(404).json({message: 'No listings found'});
-      }
+    if (listings) {
+      return res.status(200).json(listings);
+    } else {
+      return res.status(404).json({ message: 'No listings found' });
+    }
 
-   
+
   } catch (error) {
     next(error);
   }

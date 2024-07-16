@@ -6,12 +6,12 @@ import { body, validationResult } from 'express-validator';
 const router = express.Router();
 
 const stripTags = (input) => {
-    const tempDiv = document.createElement("div");
-    tempDiv.innerHTML = input;
-    return tempDiv.textContent || tempDiv.innerText || "";
-  };
+  const tempDiv = document.createElement("div");
+  tempDiv.innerHTML = input;
+  return tempDiv.textContent || tempDiv.innerText || "";
+};
 
-router.post('/create', verifyToken,   createListing);
+router.post('/create', verifyToken, createListing);
 router.delete('/delete/:id', verifyToken, deleteListing);
 router.post('/update/:id', verifyToken, updateListing);
 router.get('/get/:id', getListing);

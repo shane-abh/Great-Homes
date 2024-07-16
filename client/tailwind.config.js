@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -13,8 +14,6 @@ export default {
         "buttonSecondaryColor": "#E8C06F",
         "buttonSecondaryTextColor": "#102339"
       },
-      
-
     },
   },
   plugins: [],

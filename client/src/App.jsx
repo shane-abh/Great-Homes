@@ -14,29 +14,47 @@ import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
 
 export default function App() {
+	// Array of public routes
+	const publicRoutes = [
+		{ path: "/", element: <Home /> },
+		{ path: "/SignIn", element: <SignIn /> },
+		{ path: "/SignUp", element: <SignUp /> },
+		{ path: "/About", element: <About /> },
+		{ path: "/search", element: <Search /> },
+		{ path: "/myListings", element: <UserLisitings /> },
+		{ path: "/listing/:listingId", element: <Listing /> },
+	];
+
+	// Array of private routes
+	const privateRoutes = [
+		{ path: "/Profile", element: <Profile /> },
+		{ path: "/create-listing", element: <CreateListing /> },
+		{ path: "/update-listing/:listingId", element: <UpdateListing /> },
+	];
+
 	return (
 		<BrowserRouter>
 			<Header />
 			<div className="main-content">
 				<Routes>
-					<Route path="/" element={<Home />}></Route>
-					<Route path="/SignIn" element={<SignIn />}></Route>
-					<Route path="/SignUp" element={<SignUp />}></Route>
-					<Route path="/About" element={<About />}></Route>
-					<Route path='/search' element={<Search />} />
-					<Route path='/myLisitngs' element= {<UserLisitings/> } /> 
-					<Route path="/listing/:listingId" element={<Listing />} />
+					{/* Loop through public routes */}
+					{publicRoutes.map((route, index) => (
+						<Route
+							key={index}
+							path={route.path}
+							element={route.element}
+						/>
+					))}
 
+					{/* Loop through private routes inside the PrivateRoute component */}
 					<Route element={<PrivateRoute />}>
-						<Route path="/Profile" element={<Profile />}></Route>
-						<Route
-							path="/create-listing"
-							element={<CreateListing />}
-						/>
-						<Route
-							path="/update-listing/:listingId"
-							element={<UpdateListing />}
-						/>
+						{privateRoutes.map((route, index) => (
+							<Route
+								key={index}
+								path={route.path}
+								element={route.element}
+							/>
+						))}
 					</Route>
 				</Routes>
 			</div>
