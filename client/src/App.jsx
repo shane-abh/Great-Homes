@@ -12,6 +12,9 @@ import UpdateListing from "./pages/UpdateListing";
 import Listing from "./pages/Listing";
 import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
+import CreateLisitng2 from "./pages/CreateLisitng2";
+import Listing2 from "./pages/Lisitng2";
+
 
 export default function App() {
 	return (
@@ -25,13 +28,13 @@ export default function App() {
 					<Route path="/About" element={<About />}></Route>
 					<Route path='/search' element={<Search />} />
 					<Route path='/myLisitngs' element= {<UserLisitings/> } /> 
-					<Route path="/listing/:listingId" element={<Listing />} />
+					<Route path="/listing/:listingId" element={<Listing2 />} />
 
 					<Route element={<PrivateRoute />}>
 						<Route path="/Profile" element={<Profile />}></Route>
 						<Route
 							path="/create-listing"
-							element={<CreateListing />}
+							element={<CreateLisitng2 />}
 						/>
 						<Route
 							path="/update-listing/:listingId"

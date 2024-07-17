@@ -1,5 +1,5 @@
-import mongoose from 'mongoose';
-
+import mongoose from "mongoose";
+const propertyTypes = ["House", "Apartment", "Condominium", "Bungalow"];
 const listingSchema = new mongoose.Schema(
   {
     name: {
@@ -11,7 +11,14 @@ const listingSchema = new mongoose.Schema(
       required: true,
     },
     address: {
+      street: { type: String, required: true },
+      city: { type: String, required: true },
+      province: { type: String, required: true },
+      postalCode: { type: String, required: true },
+    },
+    propertyType: {
       type: String,
+      enum: propertyTypes,
       required: true,
     },
     regularPrice: {
@@ -30,12 +37,30 @@ const listingSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    furnished: {
-      type: Boolean,
+    parkings: {
+      type: Number,
       required: true,
     },
-    parking: {
-      type: Boolean,
+    amenities: {
+      furnished: {
+        type: Boolean,
+        required: true,
+      },
+      parking: {
+        type: Boolean,
+        required: true,
+      },
+      laundry: {
+        type: Boolean,
+        required: true,
+      },
+      kitchenEssentials: {
+        type: Boolean,
+        required: true,
+      },
+    },
+    sqFeet: {
+      type: Number,
       required: true,
     },
     type: {
@@ -58,6 +83,6 @@ const listingSchema = new mongoose.Schema(
   { timestamps: true }
 );
 
-const Listing = mongoose.model('Listing', listingSchema);
+const Listing = mongoose.model("Listing", listingSchema);
 
 export default Listing;
