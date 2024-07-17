@@ -13,6 +13,9 @@ export default {
         "buttonSecondaryColor": "#E8C06F",
         "buttonSecondaryTextColor": "#102339"
       },
+      fontFamily: {
+        cursiveFont: ["Leckerli One", 'cursive'],
+      },
       
 
     },

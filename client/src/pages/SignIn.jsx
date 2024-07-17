@@ -152,6 +152,7 @@ export default function SignIn() {
                 <button
                   type="submit"
                   className="focus:outline-none w-full text-buttonSecondaryTextColor bg-buttonSecondaryColor hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                  id="signin-btn"
                 >
                   {loading ? "Loading..." : "Sign In"}
                 </button>

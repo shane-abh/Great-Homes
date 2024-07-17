@@ -21,7 +21,7 @@ export default function UserListingItem({ listing, setUserListings }) {
         }
       };
   return (
-    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full lg:w-1/3  m-2'>
+    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full   m-2'>
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
@@ -42,7 +42,7 @@ export default function UserListingItem({ listing, setUserListings }) {
           <div className='flex items-center gap-1'>
             <MdLocationOn className='h-4 w-4 text-green-700' />
             <p className='text-sm text-gray-600 truncate w-full'>
-              {listing.address}
+              {listing.address.street}
             </p>
           </div>
           <p className='text-sm text-gray-600 line-clamp-2'>
