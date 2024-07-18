@@ -197,6 +197,7 @@ const PropertyDetailsForm = ({
                 id="Sale"
                 value="Sale"
                 name="type"
+                checked={type=== 'Sale'}
                 onChange={(e) => updateFields({ type: e.target.value })}
               />
               <label htmlFor="Sale">Sale</label>
@@ -209,6 +210,7 @@ const PropertyDetailsForm = ({
               id="Rent"
               value="Rent"
               name="type"
+              checked={type=== 'Rent'}
               onChange={(e) => updateFields({ type: e.target.value })}
             />
             <label htmlFor="Rent">Rent</label>

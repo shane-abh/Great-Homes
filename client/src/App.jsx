@@ -14,7 +14,7 @@ import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
 import CreateLisitng2 from "./pages/CreateLisitng2";
 import Listing2 from "./pages/Lisitng2";
-
+import UpdateLisitng2 from "./pages/UpdateLisitng2";
 
 export default function App() {
 	return (
@@ -38,7 +38,7 @@ export default function App() {
 						/>
 						<Route
 							path="/update-listing/:listingId"
-							element={<UpdateListing />}
+							element={<UpdateLisitng2 />}
 						/>
 					</Route>
 				</Routes>
