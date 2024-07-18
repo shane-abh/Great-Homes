@@ -6,6 +6,7 @@ import PropertyReview from "../components/PropertyReview";
 import PropertyAddressForm from "../components/PropertyAddressForm";
 import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
+import DOMPurify from "dompurify";
 
 // type FormData = {
 //   name: string,
@@ -72,11 +73,32 @@ const CreateLisitng2 = () => {
 
 
 
-  function updateFields(fields) {
-    setData((prev) => {
-      return { ...prev, ...fields };
-    });
-  }
+  const updateFields = (fields) => {
+    const sanitizedFields = {};
+    for (const key in fields) {
+      if (key === "imageUrls") {
+        // Sanitize only imageUrls array
+        sanitizedFields[key] = fields[key].map((url) => DOMPurify.sanitize(url));
+      } else if (typeof fields[key] === "string") {
+        sanitizedFields[key] = DOMPurify.sanitize(fields[key]);
+      } else if (typeof fields[key] === "object" && fields[key] !== null) {
+        sanitizedFields[key] = {};
+        for (const subKey in fields[key]) {
+          if (typeof fields[key][subKey] === "string") {
+            sanitizedFields[key][subKey] = DOMPurify.sanitize(fields[key][subKey]);
+          } else {
+            sanitizedFields[key][subKey] = fields[key][subKey];
+          }
+        }
+      } else {
+        sanitizedFields[key] = fields[key];
+      }
+    }
+    setData((prev) => ({
+      ...prev,
+      ...sanitizedFields,
+    }));
+  };
 
   const { steps, currentStepIndex, step, isFirstStep, isLastStep, back, next } =
     useMultistepForm([
@@ -113,7 +135,7 @@ const CreateLisitng2 = () => {
 
   return (
     <div className="bg-[#F6F6F6]">
-      <div className=" w-full p-5 md:w-1/2 mx-auto rounded-lg py-4">
+      <div className="  p-5 md:w-1/2 mx-auto rounded-lg py-4 max-w-screen-lg">
         <form onSubmit={onSubmit}>
           {step}
           <div>
