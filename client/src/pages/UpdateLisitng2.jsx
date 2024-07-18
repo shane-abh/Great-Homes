@@ -1,10 +1,10 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useMultistepForm } from "../util/useMultistepForm";
 import PropertyDetailsForm from "../components/PropertyDetailsForm";
 import PropertyImageForm from "../components/PropertyImageForm";
 import PropertyReview from "../components/PropertyReview";
 import PropertyAddressForm from "../components/PropertyAddressForm";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 
 // type FormData = {
@@ -36,7 +36,7 @@ import { useSelector } from "react-redux";
 // };
 
 const INITIAL_DATA = {
-  name: "", // name of house/villa/apartment
+  name: "",
   description: "",
   address: {
     street: "",
@@ -44,7 +44,7 @@ const INITIAL_DATA = {
     province: "",
     postalCode: "",
   },
-  propertyType: "", // villa/bungalow/apartment/condominium
+  propertyType: "",
   regularPrice: 0,
   discountPrice: 0,
   bathrooms: 0,
@@ -63,14 +63,28 @@ const INITIAL_DATA = {
   userRef: "",
 };
 
-const CreateLisitng2 = () => {
+const UpdateLisitng2 = () => {
   const [data, setData] = useState(INITIAL_DATA);
   const navigate = useNavigate();
   const { currentUser } = useSelector((state) => state.user);
   const [error, setError] = useState(false);
   const [loading, setLoading] = useState(false);
+  const params = useParams();
 
+  useEffect(() => {
+    const fetchListing = async () => {
+        const listingId = params.listingId;
+        const res = await fetch(`/api/listing/get/${listingId}`);
+        const data = await res.json();
+        if (data.success === false) {
+            console.log(data.message);
+            return;
+        }
+        setData(data);
+    };
 
+    fetchListing();
+}, []);
 
   function updateFields(fields) {
     setData((prev) => {
@@ -143,4 +157,4 @@ const CreateLisitng2 = () => {
   );
 };
 
-export default CreateLisitng2;
+export default UpdateLisitng2;

@@ -1,229 +1,204 @@
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState, useCallback } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
 import ListingItem from "../components/ListingItem";
 
 export default function Search() {
   const navigate = useNavigate();
+  const location = useLocation();
   const [sidebardata, setSidebardata] = useState({
     searchTerm: "",
     type: "all",
     parking: false,
     furnished: false,
+    laundry: false,
+    kitchenEssentials: false,
     offer: false,
     sort: "created_at",
     order: "desc",
+    minPrice: 0,
+    maxPrice: Infinity,
+    apartment: false,
+    bungalow: false,
+    condominium: false,
+    house: false,
   });
 
   const [loading, setLoading] = useState(false);
   const [listings, setListings] = useState([]);
   const [showMore, setShowMore] = useState(false);
 
-  useEffect(() => {
+  const parseUrlParams = useCallback(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get("searchTerm");
-    const typeFromUrl = urlParams.get("type");
-    const parkingFromUrl = urlParams.get("parking");
-    const furnishedFromUrl = urlParams.get("furnished");
-    const offerFromUrl = urlParams.get("offer");
-    const sortFromUrl = urlParams.get("sort");
-    const orderFromUrl = urlParams.get("order");
+    return {
+      searchTerm: urlParams.get("searchTerm") || "",
+      type: urlParams.get("type") || "all",
 
-    if (
-      searchTermFromUrl ||
-      typeFromUrl ||
-      parkingFromUrl ||
-      furnishedFromUrl ||
-      offerFromUrl ||
-      sortFromUrl ||
-      orderFromUrl
-    ) {
-      setSidebardata({
-        searchTerm: searchTermFromUrl || "",
-        type: typeFromUrl || "all",
-        parking: parkingFromUrl === "true" ? true : false,
-        furnished: furnishedFromUrl === "true" ? true : false,
-        offer: offerFromUrl === "true" ? true : false,
-        sort: sortFromUrl || "created_at",
-        order: orderFromUrl || "desc",
-      });
-    }
+      parking: urlParams.get("parking") === "true",
+      furnished: urlParams.get("furnished") === "true",
+      laundry: urlParams.get("laundry") === "true",
+      kitchenEssentials: urlParams.get("kitchenEssentials") === "true",
+      offer: urlParams.get("offer") === "true",
+      sort: urlParams.get("sort") || "created_at",
+      order: urlParams.get("order") || "desc",
+      minPrice: urlParams.get("minPrice") || 0,
+      maxPrice: urlParams.get("maxPrice") || Infinity,
+      apartment: urlParams.get("apartment") === "true",
+      bungalow: urlParams.get("bungalow") === "true",
+      condominium: urlParams.get("condominium") === "true",
+      house: urlParams.get("house") === "true",
+    };
+  }, [location.search]);
+
+  useEffect(() => {
+    const updateSidebarData = () => {
+      setSidebardata(parseUrlParams());
+    };
 
     const fetchListings = async () => {
       setLoading(true);
       setShowMore(false);
-      const searchQuery = urlParams.toString();
+      const searchQuery = new URLSearchParams(location.search).toString();
       const res = await fetch(`/api/listing/get?${searchQuery}`);
       const data = await res.json();
-      if (data.length > 8) {
-        setShowMore(true);
-      } else {
-        setShowMore(false);
-      }
-      setListings(data);
+      setShowMore(data.length > 8);
+      if (data.message != "No listings found") setListings(data);
+      else setListings("No listings found");
       setLoading(false);
     };
 
+    updateSidebarData();
     fetchListings();
-  }, [location.search]);
+  }, [location.search, parseUrlParams]);
 
   const handleChange = (e) => {
-
-  
-    if (
-      e.target.id === "all" ||
-      e.target.id === "Rent" ||
-      e.target.id === "Sale"
-    ) {
-      setSidebardata({ ...sidebardata, type: e.target.id });
-    }
-
-    if (e.target.id === "searchTerm") {
-      setSidebardata({ ...sidebardata, searchTerm: e.target.value });
-    }
-
-    if (
-      e.target.id === "parking" ||
-      e.target.id === "furnished" ||
-      e.target.id === "offer"
-    ) {
-      setSidebardata({
-        ...sidebardata,
-        [e.target.id]:
-          e.target.checked || e.target.checked === "true" ? true : false,
-      });
-    }
-
-    if (e.target.id === "sort_order") {
-      const sort = e.target.value.split("_")[0] || "created_at";
-
-      const order = e.target.value.split("_")[1] || "desc";
-
-      setSidebardata({ ...sidebardata, sort, order });
-    }
+    const { id, value, checked, type } = e.target;
+    setSidebardata((prev) => ({
+      ...prev,
+      [id]: type === "checkbox" ? checked : value,
+    }));
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams();
-    urlParams.set("searchTerm", sidebardata.searchTerm);
-    urlParams.set("type", sidebardata.type);
-    urlParams.set("parking", sidebardata.parking);
-    urlParams.set("furnished", sidebardata.furnished);
-    urlParams.set("offer", sidebardata.offer);
-    urlParams.set("sort", sidebardata.sort);
-    urlParams.set("order", sidebardata.order);
-    const searchQuery = urlParams.toString();
-    navigate(`/search?${searchQuery}`);
+    for (const key in sidebardata) {
+      if (typeof sidebardata[key] === "boolean") {
+        urlParams.set(key, sidebardata[key].toString());
+      } else {
+        urlParams.set(key, sidebardata[key]);
+      }
+    }
+    navigate(`/search?${urlParams.toString()}`);
   };
 
   const onShowMoreClick = async () => {
     const numberOfListings = listings.length;
-    const startIndex = numberOfListings;
     const urlParams = new URLSearchParams(location.search);
-    urlParams.set("startIndex", startIndex);
-    const searchQuery = urlParams.toString();
-    const res = await fetch(`/api/listing/get?${searchQuery}`);
+    urlParams.set("startIndex", numberOfListings);
+    const res = await fetch(`/api/listing/get?${urlParams.toString()}`);
     const data = await res.json();
-    if (data.length < 9) {
-      setShowMore(false);
-    }
-    setListings([...listings, ...data]);
+    setShowMore(data.length >= 9);
+    setListings((prev) => [...prev, ...data]);
   };
+
+  const renderCheckbox = (id, label) => (
+    <div className="flex gap-2">
+      <input
+        type="checkbox"
+        id={id}
+        className="w-5"
+        onChange={handleChange}
+        checked={sidebardata[id]}
+      />
+      <span>{label}</span>
+    </div>
+  );
+
+  const renderFormSection = (title, elements) => (
+    <div>
+      <label className="font-medium text-xl">{title}</label>
+      <div className="flex flex-col gap-2 mt-4">{elements}</div>
+    </div>
+  );
+
   return (
     <div className="flex flex-col md:flex-row">
-      <div className="p-7  border-b-2 md:border-r-2 md:min-h-screen">
+      <div className="p-7 border-b-2 md:border-r-2 md:min-h-screen">
         <form onSubmit={handleSubmit} className="flex flex-col gap-8">
-          <div className="flex flex-col">
-            <label className="whitespace-nowrap font-semibold">
-              Search Term:
-            </label>
+          {renderFormSection("Search Term:", [
             <input
+              key="searchTerm"
               type="text"
               id="searchTerm"
               placeholder="Search..."
               className="border rounded-lg p-3 w-full"
               value={sidebardata.searchTerm}
               onChange={handleChange}
-            />
-          </div>
-          <div className="">
-            <label className="font-medium text-xl"> Property Type</label>
-            <div className="mt-4">
-              <div className="flex  gap-3">
-                <input
-                  type="checkbox"
-                  id="all"
-                  className="w-4 rounded-lg"
-                  onChange={handleChange}
-                  checked={sidebardata.type === "all"}
-                />
-                <span>Rent & Sale</span>
-              </div>
-              <div className="flex gap-3">
-                <input
-                  type="checkbox"
-                  id="Rent"
-                  className="w-4"
-                  onChange={handleChange}
-                  checked={sidebardata.type === "Rent"}
-                />
-                <span>Rent</span>
-              </div>
-              <div className="flex gap-3">
-                <input
-                  type="checkbox"
-                  id="Sale"
-                  className="w-4"
-                  onChange={handleChange}
-                  checked={sidebardata.type === "Sale"}
-                />
-                <span>Sale</span>
-              </div>
-              <div className="flex gap-3">
-                <input
-                  type="checkbox"
-                  id="offer"
-                  className="w-4"
-                  onChange={handleChange}
-                  checked={sidebardata.offer}
-                />
-                <span>Offer</span>
-              </div>
-            </div>
-          </div>
-          <div className="">
-            <label className="font-semibold">Amenities:</label>
-            <div className="flex gap-2">
+            />,
+          ])}
+          {renderFormSection("Property Type", [
+            renderCheckbox("all", "Rent & Sale"),
+            renderCheckbox("Rent", "Rent"),
+            renderCheckbox("Sale", "Sale"),
+            renderCheckbox("offer", "Offer"),
+          ])}
+          {renderFormSection("Style of Home", [
+            renderCheckbox("apartment", "Apartment"),
+            renderCheckbox("bungalow", "Bungalow"),
+            renderCheckbox("condominium", "Condominium"),
+            renderCheckbox("house", "House"),
+          ])}
+
+          {renderFormSection("Price", [
+            <div key="minPrice">
+              <label
+                htmlFor="minPrice"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Min. Price
+              </label>
               <input
-                type="checkbox"
-                id="parking"
-                className="w-5"
+                type="number"
+                id="minPrice"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="0"
+                value={sidebardata.minPrice}
                 onChange={handleChange}
-                checked={sidebardata.parking}
               />
-              <span>Parking</span>
-            </div>
-            <div className="flex gap-2">
+            </div>,
+            <div key="maxPrice">
+              <label
+                htmlFor="maxPrice"
+                className="block mb-2 text-sm font-medium text-gray-900"
+              >
+                Max. Price
+              </label>
               <input
-                type="checkbox"
-                id="furnished"
-                className="w-5"
+                type="number"
+                id="maxPrice"
+                className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
+                placeholder="100,000"
+                value={sidebardata.maxPrice}
                 onChange={handleChange}
-                checked={sidebardata.furnished}
               />
-              <span>Furnished</span>
-            </div>
-          </div>
+            </div>,
+          ])}
+          {renderFormSection("Amenities", [
+            renderCheckbox("parking", "Parking"),
+            renderCheckbox("furnished", "Furnished"),
+            renderCheckbox("laundry", "Laundry"),
+            renderCheckbox("kitchenEssentials", "Kitchen Essentials"),
+          ])}
           <div className="flex flex-col">
             <label className="font-semibold">Sort:</label>
             <select
               onChange={handleChange}
-              defaultValue={"created_at_desc"}
+              defaultValue="created_at_desc"
               id="sort_order"
               className="border rounded-lg p-3"
             >
               <option value="regularPrice_desc">Price high to low</option>
-              <option value="regularPrice_asc">Price low to hight</option>
+              <option value="regularPrice_asc">Price low to high</option>
               <option value="createdAt_desc">Latest</option>
               <option value="createdAt_asc">Oldest</option>
             </select>
@@ -246,13 +221,12 @@ export default function Search() {
               Loading...
             </p>
           )}
-
-          {!loading &&
-            listings &&
-            listings.map((listing) => (
-              <ListingItem key={listing._id} listing={listing} />
-            ))}
-
+          {listings == "No listings found"
+            ? 'No results found related to " ' + sidebardata.searchTerm + ' "'
+            : !loading &&
+              listings.map((listing) => (
+                <ListingItem key={listing._id} listing={listing} />
+              ))}
           {showMore && (
             <button
               onClick={onShowMoreClick}

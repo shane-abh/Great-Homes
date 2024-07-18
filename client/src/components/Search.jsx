@@ -1,6 +1,22 @@
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
 const Search = () => {
+const [searchTerm, setSearchTerm] = useState();
+const navigate = useNavigate()
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(searchTerm);
+    navigate(`/search/?searchTerm=${searchTerm}`);
+  };
+
+  const handleChange= (e) => {
+    setSearchTerm(e.target.value);
+  }
+
   return (
-    <form className="max-w-xl mx-auto ">
+    <form className="max-w-xl mx-auto" onSubmit={handleSubmit}>
       <div className="relative ">
         <div className="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
           <svg
@@ -24,6 +40,7 @@ const Search = () => {
           id="default-search"
           className="block w-full p-4 ps-10 text-sm text-gray-900 border border-gray-300 rounded-3xl bg-white "
           placeholder="Enter an address, or city"
+          onChange={handleChange}
           required
         />
         <button

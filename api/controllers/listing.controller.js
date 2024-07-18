@@ -75,55 +75,70 @@ export const getListing = async (req, res, next) => {
 
 export const getListings = async (req, res, next) => {
   try {
-    debugger;
+    console.log(req.query);
+    
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
-    let offer = req.query.offer;
-    console.log(req.query)
+    const searchTerm = req.query.searchTerm || "";
+    const sort = req.query.sort || "createdAt";
+    const order = req.query.order === "asc" ? 1 : -1;
+    
+    const parseBooleanFilter = (filter) => {
+      if (filter === undefined || filter === "false") {
+        return { $in: [false, true] };
+      } else {
+        return true;
+      }
+    };
 
-    if (offer === undefined || offer === "false") {
-      offer = { $in: [false, true] };
-    }
-
-    let furnished = req.query.furnished;
-    if (furnished === undefined || furnished === "false") {
-      furnished = { $in: [false, true] };
-    } else {
-      furnished = true;
-    }
-
-    // Handle parking filter
-    let parking = req.query.parking;
-    if (parking === undefined || parking === "false") {
-      parking = { $in: [false, true] };
-    } else {
-      parking = true;
-    }
+    const offer = parseBooleanFilter(req.query.offer);
+    const furnished = parseBooleanFilter(req.query.furnished);
+    const parking = parseBooleanFilter(req.query.parking);
+    const laundry = parseBooleanFilter(req.query.laundry);
+    const kitchenEssentials = parseBooleanFilter(req.query.kitchenEssentials);
 
     let type = req.query.type;
-
     if (type === undefined || type === "all") {
       type = { $in: ["Sale", "Rent"] };
     }
 
-    const searchTerm = req.query.searchTerm || "";
+    const minPrice = parseFloat(req.query.minPrice) || 0;
+    const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
 
-    const sort = req.query.sort || "createdAt";
+    const homeStyles = ["apartment", "bungalow", "condominium", "house"];
+    const homeStyleFilters = homeStyles.reduce((acc, style) => {
+      if (req.query[style] === "true") {
+        acc.push(style.charAt(0).toUpperCase() + style.slice(1)); // Capitalize first letter
+      }
+      return acc;
+    }, []);
 
-    const order = req.query.order || "desc";
-
-    const listings = await Listing.find({
-      name: { $regex: searchTerm, $options: "i" },
+    const query = {
+      $or: [
+        { name: { $regex: searchTerm, $options: "i" } },
+        { "address.city": { $regex: searchTerm, $options: "i" } },
+        { "address.street": { $regex: searchTerm, $options: "i" } },
+        { "address.province": { $regex: searchTerm, $options: "i" } },
+      ],
       offer,
       type,
       "amenities.furnished": furnished,
       "amenities.parking": parking,
-    })
+      "amenities.laundry": laundry,
+      "amenities.kitchenEssentials": kitchenEssentials,
+      regularPrice: { $gte: minPrice, $lte: maxPrice }
+    };
+
+    if (homeStyleFilters.length > 0) {
+      query.propertyType = { $in: homeStyleFilters };
+    }
+
+    const listings = await Listing.find(query)
       .sort({ [sort]: order })
       .limit(limit)
       .skip(startIndex);
 
-    if (listings) {
+    if (listings.length > 0) {
       return res.status(200).json(listings);
     } else {
       return res.status(404).json({ message: "No listings found" });
@@ -132,6 +147,8 @@ export const getListings = async (req, res, next) => {
     next(error);
   }
 };
+
+
 
 export const getAll = async (req, res, next) => {
   const listings = await Listing.find();
