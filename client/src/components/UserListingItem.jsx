@@ -21,7 +21,7 @@ export default function UserListingItem({ listing, setUserListings }) {
         }
       };
   return (
-    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full   m-2'>
+    <div className='bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-1/3    m-2'>
       <Link to={`/listing/${listing._id}`}>
         <img
           src={
