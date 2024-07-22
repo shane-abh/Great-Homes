@@ -121,7 +121,7 @@ export default function Listing2() {
                     )}
                   </div>
                   <p className="text-slate-800">
-                    <span className="font-semibold text-black">
+                    <span className="font-semibold text-black" id="description">
                       Description -{" "}
                     </span>
                     {listing.description}
