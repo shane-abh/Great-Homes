@@ -16,8 +16,6 @@ export default {
       fontFamily: {
         cursiveFont: ["Leckerli One", 'cursive'],
       },
-      
-
     },
   },
   plugins: [],
