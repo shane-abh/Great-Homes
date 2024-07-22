@@ -1,5 +1,5 @@
 import mongoose from "mongoose";
-const propertyTypes = ["House", "Apartment", "Condominium", "Bungalow"];
+const propertyTypes = ["Apartment", "Bungalow", "Condominium", "Villa"];
 const listingSchema = new mongoose.Schema(
   {
     name: {

@@ -60,7 +60,7 @@ const INITIAL_DATA = {
   sqFeet: 0, // Assuming a sample square footage
   type: "",
   offer: false,
-  imageUrls: [""],
+  imageUrls: [],
   userRef: "",
 };
 
@@ -111,7 +111,7 @@ const CreateLisitng2 = () => {
   async function onSubmit(e) {
     e.preventDefault();
     if (!isLastStep) return next();
-    alert("Successful Account Creation");
+    // alert("Successful Account Creation");
     setLoading(true);
       setError(false);
       const res = await fetch("/api/listing/create", {

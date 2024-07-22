@@ -49,10 +49,12 @@ const AddressForm = ({ address, updateFields }) => {
 
         <select
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+          id="province"
           onChange={(e) =>
             updateFields({ address: { ...address, province: e.target.value } })
           }
         >
+          <option value="">--Select an option--</option>
           <option value="Alberta">Alberta</option>
           <option value="British Columbia">British Columbia</option>
           <option value="Manitoba">Manitoba</option>

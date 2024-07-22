@@ -19,7 +19,7 @@ const PropertyImageForm = ({ imageUrls, updateFields, ...data }) => {
   const [loading, setLoading] = useState(false);
   const [files, setFiles] = useState([]);
 
-
+console.log(imageUrls)
  
 
   const handleImageSubmit = (e) => {
@@ -104,6 +104,7 @@ const PropertyImageForm = ({ imageUrls, updateFields, ...data }) => {
           <button
             type="button"
             disabled={uploading}
+            id="uploadbtn"
             onClick={handleImageSubmit}
             className="p-3 text-green-700 border border-green-700 rounded uppercase hover:shadow-lg disabled:opacity-80"
           >

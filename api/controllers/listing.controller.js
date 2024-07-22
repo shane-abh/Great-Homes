@@ -105,7 +105,7 @@ export const getListings = async (req, res, next) => {
     const minPrice = parseFloat(req.query.minPrice) || 0;
     const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
 
-    const homeStyles = ["apartment", "bungalow", "condominium", "house"];
+    const homeStyles = ["Apartment", "Bungalow", "Condominium", "Villa"];
     const homeStyleFilters = homeStyles.reduce((acc, style) => {
       if (req.query[style] === "true") {
         acc.push(style.charAt(0).toUpperCase() + style.slice(1)); // Capitalize first letter
