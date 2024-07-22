@@ -90,6 +90,8 @@ const MortgageCalculator = ({ purchasePrice }) => {
                       id="downPaymentPercent"
                       name="downPaymentPercent"
                       placeholder="5%"
+                      min={0}
+                      max={100}
                       // value={formData.downPaymentPercent}
                       onChange={handleChange}
                     />
@@ -129,10 +131,12 @@ const MortgageCalculator = ({ purchasePrice }) => {
                   <label htmlFor="annualInterestRate">Mortgage rate</label>
                   <input
                     className="px-2"
-                    type="number"
+                    type="text"
                     id="annualInterestRate"
                     name="annualInterestRate"
                     placeholder="5.09%"
+                    min={2}
+                    max={100}
                     value={formData.annualInterestRate}
                     onChange={handleChange}
                   />
