@@ -16,7 +16,7 @@ export default function Header() {
 	return (
 		<header
 			className={`sticky top-0 z-[20] transition-colors duration-300 ${
-				scrolled ? "bg-primary" : "bg-transparent"
+				scrolled ? "bg-primary" : "bg-[#1D45AB]"
 			} shadow-sm bg-clip-padding blur-background-filter`}
 		>
 			<nav className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto py-6 px-1">
