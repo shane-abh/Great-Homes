@@ -10,6 +10,8 @@ import {
 } from "../redux/user/userSlice";
 import OAuth from "../../OAuth";
 import { handleApiRequest } from "../util/handleApiRequest";
+import { encryptData } from "../util/encryption";
+
 
 export default function SignIn() {
   const [formData, setFormData] = useState({});
@@ -26,6 +28,9 @@ export default function SignIn() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const encryptFormData = encryptData(formData);
+
     await handleApiRequest(
       dispatch,
       navigate,
@@ -36,7 +41,7 @@ export default function SignIn() {
       signInFailure,
       "/",
       { "Content-Type": "application/json" },
-      formData
+      {data: encryptFormData}
     );
   };
 
@@ -147,6 +152,7 @@ export default function SignIn() {
                 <button
                   type="submit"
                   className="focus:outline-none w-full text-buttonSecondaryTextColor bg-buttonSecondaryColor hover:bg-yellow-500 focus:ring-4 focus:ring-yellow-300 font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:focus:ring-yellow-900"
+                  id="signin-btn"
                 >
                   {loading ? "Loading..." : "Sign In"}
                 </button>
