@@ -12,7 +12,7 @@ const PropertyReview = ({
   bedrooms,
   parkings,
   amenities,
-  sqFeet, // Assuming a sample square footage
+  sqFeet,
   type,
   offer,
   imageUrls,
