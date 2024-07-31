@@ -62,17 +62,17 @@ const MortgageCalculator = ({ purchasePrice }) => {
   const formatter = new Intl.NumberFormat("en-US");
 
   return (
-    <div className="flex flex-col">
-      <div className="bg-white p-4 rounded-lg">
-        <h2 className="text-2xl mb-8 font-bold mt-8">Mortgage Calculator</h2>
-        <div className="grid lg:grid-cols-2 grid-rows-1">
+    <div className="flex flex-col items-center min-h-screen bg-gray-100 py-10">
+      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-4xl">
+        <h2 className="text-3xl mb-6 font-bold text-center text-blue-700">Mortgage Calculator</h2>
+        <div className="grid lg:grid-cols-2 gap-8">
           <div id="calculatorForm">
             <form onSubmit={handleSubmit}>
-              <div className="p-4 bg-slate-300 flex flex-col mb-4 font-semibold rounded-md">
-                <div className="flex flex-col">
-                  <label htmlFor="purchasePrice">Purchase Price</label>
+              <div className="space-y-6">
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="purchasePrice">Purchase Price</label>
                   <input
-                    className="px-2"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
                     type="number"
                     id="purchasePrice"
                     name="purchasePrice"
@@ -81,24 +81,22 @@ const MortgageCalculator = ({ purchasePrice }) => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor="downPayment">Down Payment</label>
-                  <div className="flex">
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="downPayment">Down Payment</label>
+                  <div className="flex items-center space-x-3">
                     <input
-                      className="px-2"
+                      className="w-full p-3 border border-gray-300 rounded-lg"
                       type="text"
                       id="downPaymentPercent"
                       name="downPaymentPercent"
                       placeholder="5%"
                       min={0}
                       max={100}
-                      // value={formData.downPaymentPercent}
                       onChange={handleChange}
                     />
-
-                    <span className="px-3">OR</span>
+                    <span className="font-semibold text-gray-700">OR</span>
                     <input
-                      className="px-2"
+                      className="w-full p-3 border border-gray-300 rounded-lg"
                       type="number"
                       id="downPaymentAmount"
                       name="downPaymentAmount"
@@ -108,11 +106,11 @@ const MortgageCalculator = ({ purchasePrice }) => {
                     />
                   </div>
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor="loanTermYears">Amortization Period</label>
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="loanTermYears">Amortization Period</label>
                   <select
                     name="loanTermYears"
-                    className="px-2"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
                     value={formData.loanTermYears}
                     onChange={handleChange}
                   >
@@ -127,10 +125,10 @@ const MortgageCalculator = ({ purchasePrice }) => {
                     <option value="45">45 Years</option>
                   </select>
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor="annualInterestRate">Mortgage rate</label>
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="annualInterestRate">Mortgage Rate</label>
                   <input
-                    className="px-2"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
                     type="text"
                     id="annualInterestRate"
                     name="annualInterestRate"
@@ -143,11 +141,11 @@ const MortgageCalculator = ({ purchasePrice }) => {
                 </div>
               </div>
 
-              <div className="p-4 bg-slate-300 flex flex-col font-semibold rounded-md">
-                <div className="flex flex-col">
-                  <label htmlFor="extraPayment">Extra Payment Amount</label>
+              <div className="mt-8 space-y-6">
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="extraPayment">Extra Payment Amount</label>
                   <input
-                    className="px-2"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
                     type="number"
                     id="extraPayment"
                     name="extraPayment"
@@ -156,12 +154,10 @@ const MortgageCalculator = ({ purchasePrice }) => {
                     onChange={handleChange}
                   />
                 </div>
-                <div className="flex flex-col">
-                  <label htmlFor="extraPaymentIntervalYears">
-                    Extra Payment Interval (in years)
-                  </label>
+                <div className="bg-gray-100 p-6 rounded-lg shadow-sm">
+                  <label className="block mb-2 font-semibold text-gray-700" htmlFor="extraPaymentIntervalYears">Extra Payment Interval (in years)</label>
                   <input
-                    className="px-2"
+                    className="w-full p-3 border border-gray-300 rounded-lg"
                     type="number"
                     id="extraPaymentIntervalYears"
                     name="extraPaymentIntervalYears"
@@ -174,73 +170,67 @@ const MortgageCalculator = ({ purchasePrice }) => {
 
               <button
                 type="submit"
-                className="bg-blue-600 w-full my-2 rounded-lg text-white p-2"
+                className="w-full bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 rounded-lg mt-8"
               >
                 Calculate
               </button>
             </form>
           </div>
 
-          <div id="results" className=" px-2">
-            <div className="grid grid-rows-3 h-full">
-              <div className="w-full  row-span-2 grid-cols-2 flex  ">
-                <div className="bg-white flex flex-col place-content-center text-center w-3/4 m-1 border-gray-200/20 shadow-xl border-2  rounded-lg">
-                  <h3 className="font-semibold py-2">Total Mortgage</h3>
-                  <p className="font-bold text-2xl">
-                    {mortgageData != 0
-                      ? "$" +
-                        formatter.format(
-                          parseFloat(mortgageData.principal).toFixed(2)
-                        )
-                      : "$0"}
-                  </p>
-                </div>
-                <div className="w-1/4 flex flex-col justify-between">
-                  <div className="bg-white text-center m-1 flex flex-col flex-wrap items-center p-2 h-1/2 border-gray-200/20 shadow-xl border-2  rounded-lg">
-                    <h3 className="font-semibold py-2">Monthly Payment</h3>
-                    <p className="font-bold text-xl">
-                      {mortgageData != 0
-                        ? "$" +
-                          formatter.format(
-                            parseFloat(
-                              mortgageData.standardAmortization.monthlyPayment
-                            ).toFixed(2)
-                          )
-                        : "$0"}
-                    </p>
-                  </div>
-                  <div className="bg-white text-center m-1 flex flex-col flex-wrap items-center p-2 h-1/2 border-gray-200/20 shadow-xl border-2  rounded-lg">
-                    <h3 className="font-semibold py-2">CMHC Insurance</h3>
-                    <p className="font-bold text-xl">
-                      {mortgageData != 0
-                        ? "$" +
-                          formatter.format(
-                            parseFloat(mortgageData.cmhcPremium).toFixed(2)
-                          )
-                        : "$0"}
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="border-gray-200/20 shadow-xl border-2 text-center p-2  rounded-lg">
-                <h3 className="font-semibold py-2">Recommendation</h3>
-                <p className="font-medium text-lg">
-                  If you pay $
-                  <span className="font-bold">
-                    {formatter.format(formData.extraPayment)}
-                  </span>{" "}
-                  every {formData.extraPaymentIntervalYears} year, you can save
-                  $
-                  <span className="font-bold">
-                    {mortgageData.interestSaved ? formatter.format(mortgageData.interestSaved): "0"}
-                  </span>
-                  , and pay off{" "}
-                  <span className="font-bold">
-                    {mortgageData.timeSavedMonths}
-                  </span>{" "}
-                  months early
+          <div id="results" className="flex flex-col justify-between">
+            <div className="bg-white flex-grow flex flex-col justify-center items-center text-center p-6 border border-gray-200 shadow-lg rounded-lg mb-6">
+              <h3 className="font-semibold text-lg mb-2 text-gray-700">Total Mortgage</h3>
+              <p className="font-bold text-2xl text-blue-700">
+                {mortgageData != 0
+                  ? "$" +
+                    formatter.format(
+                      parseFloat(mortgageData.principal).toFixed(2)
+                    )
+                  : "$0"}
+              </p>
+            </div>
+            <div className="flex flex-col space-y-6 mb-6">
+              <div className="bg-white text-center p-4 flex flex-col items-center justify-center border border-gray-200 shadow-lg rounded-lg">
+                <h3 className="font-semibold text-lg mb-2 text-gray-700">Monthly Payment</h3>
+                <p className="font-bold text-xl text-blue-700">
+                  {mortgageData != 0
+                    ? "$" +
+                      formatter.format(
+                        parseFloat(
+                          mortgageData.standardAmortization.monthlyPayment
+                        ).toFixed(2)
+                      )
+                    : "$0"}
                 </p>
               </div>
+              <div className="bg-white text-center p-4 flex flex-col items-center justify-center border border-gray-200 shadow-lg rounded-lg">
+                <h3 className="font-semibold text-lg mb-2 text-gray-700">CMHC Insurance</h3>
+                <p className="font-bold text-xl text-blue-700">
+                  {mortgageData != 0
+                    ? "$" +
+                      formatter.format(
+                        parseFloat(mortgageData.cmhcPremium).toFixed(2)
+                      )
+                    : "$0"}
+                </p>
+              </div>
+            </div>
+            <div className="bg-white text-center p-6 border border-gray-200 shadow-lg rounded-lg">
+              <h3 className="font-semibold text-lg mb-2 text-gray-700">Recommendation</h3>
+              <p className="text-gray-700">
+                If you pay $
+                <span className="font-bold">
+                  {formatter.format(formData.extraPayment)}
+                </span>{" "}
+                every {formData.extraPaymentIntervalYears} year, you can save $
+                <span className="font-bold">
+                  {mortgageData.interestSaved ? formatter.format(mortgageData.interestSaved) : "0"}
+                </span>, and pay off{" "}
+                <span className="font-bold">
+                  {mortgageData.timeSavedMonths}
+                </span>{" "}
+                months early
+              </p>
             </div>
           </div>
         </div>
