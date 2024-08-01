@@ -1,16 +1,17 @@
 import Logo from "./Logo.jsx";
-import { GiHamburgerMenu } from "react-icons/gi";
-import { IoClose } from "react-icons/io5";
+import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
+import useScroll from "../util/useScroll";
 import {
 	signOutUserStart,
 	deleteUserSuccess,
 	deleteUserFailure,
 } from "../redux/user/userSlice.js";
 import { handleApiRequest } from "../util/handleApiRequest.js";
-import useScroll from "../util/useScroll";
-import { useState } from "react";
+import { DarkmodeButton } from "./DarkmodeButton";
+import { GiHamburgerMenu } from "react-icons/gi";
+import { IoClose } from "react-icons/io5";
 
 export default function Header() {
 	const [isOpen, setIsOpen] = useState(false);
@@ -40,10 +41,10 @@ export default function Header() {
 	return (
 		<header
 			className={`sticky top-0 z-[20] transition-colors duration-300 ${
-				scrolled ? "bg-black" : "bg-primary"
-			} shadow-sm bg-clip-padding blur-background-filter`}
+				scrolled ? "bg-black" : "bg-white"
+			} dark:bg-black shadow-sm bg-clip-padding blur-background-filter`}
 		>
-			<nav className=" border-gray-200 ">
+			<nav className="border-gray-200">
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
 					<Logo />
 					<button className="md:hidden" onClick={toggleNavBar}>
@@ -108,6 +109,9 @@ export default function Header() {
 										>
 											Sign Out
 										</button>
+									</li>
+									<li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+										<DarkmodeButton />
 									</li>
 								</>
 							)}

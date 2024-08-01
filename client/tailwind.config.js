@@ -4,6 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
+  darkMode: "class",
   theme: {
     extend: {
       colors: {
@@ -16,6 +17,9 @@ export default {
       fontFamily: {
         cursiveFont: ["Leckerli One", 'cursive'],
       },
+      backgroundImage: {
+        'profile-pattern': "url('../profile-bg.jpg')",
+      }
     },
   },
   plugins: [],

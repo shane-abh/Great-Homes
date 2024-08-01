@@ -13,7 +13,7 @@ import { LISTING_ITEM_IMG } from "../util/constants";
 
 export default function ListingItem({ listing }) {
 	return (
-		<div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[330px] mb-6">
+		<div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-full sm:w-[270px] mb-6">
 			<Link to={`/listing/${listing._id}`}>
 				<img
 					src={listing.imageUrls[0] || LISTING_ITEM_IMG}
@@ -39,7 +39,7 @@ export default function ListingItem({ listing }) {
 						{listing.description}
 					</p>
 
-					<div className="text-slate-700 flex gap-12 py-4">
+					<div className="text-slate-700 flex gap-4 py-4">
 						<div className="font-bold text-xs flex gap-2">
 							<FaBed className="text-lg" />
 							{listing.bedrooms}
