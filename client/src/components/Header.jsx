@@ -41,8 +41,8 @@ export default function Header() {
 	return (
 		<header
 			className={`sticky top-0 z-[20] transition-colors duration-300 ${
-				scrolled ? "bg-black" : "bg-white"
-			} dark:bg-black shadow-sm bg-clip-padding blur-background-filter`}
+				scrolled ? "bg-gray-400" : "bg-white"
+			} dark:bg-black shadow-md bg-clip-padding blur-background-filter`}
 		>
 			<nav className="border-gray-200">
 				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
