@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
-import AmoritizationChart from "../components/AmoritizationChart";
+// import { AmoritizationChart } from "../components/AmoritizationChart";
+
+import { AmortizationChart } from "./AmoritizationChart";
 
 const MortgageCalculator = ({ purchasePrice }) => {
 	const [formData, setFormData] = useState({
@@ -300,7 +302,7 @@ const MortgageCalculator = ({ purchasePrice }) => {
 					<h2 className="text-2xl mb-8 font-bold mt-8">
 						Amoritization Chart
 					</h2>
-					<AmoritizationChart amoritizationData={mortgageData} />
+					<AmortizationChart amoritizationData={mortgageData} />
 				</div>
 			) : (
 				""

@@ -5,7 +5,7 @@ import { Navigation } from "swiper/modules";
 import SwiperCore from "swiper";
 import "swiper/css/bundle";
 import ListingItem from "../components/ListingItem";
-import hero from "../assets/hero.jpg";
+import hero from "../assets/hero-min.webp";
 import Search from "../components/Search";
 import {
 	OFFER_LISTINGS,
@@ -73,12 +73,6 @@ const Home = () => {
 					<div className="text-xs sm:text-sm z-10 items-center justify-center outline-none">
 						<Search />
 					</div>
-					{/* <Link
-            to={"/search"}
-            className="text-xs sm:text-sm font-bold hover:underline"
-          >
-            Let's get started...
-          </Link> */}
 				</div>
 			</div>
 
