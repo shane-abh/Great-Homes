@@ -1,6 +1,7 @@
 import Listing from "../models/lisitng.model.js";
 import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
+import nodemailer from 'nodemailer'
 
 export const createListing = async (req, res, next) => {
   // const errors = validationResult(req);
@@ -15,7 +16,6 @@ export const createListing = async (req, res, next) => {
     next(error);
   }
 };
-
 
 export const deleteListing = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
@@ -76,13 +76,13 @@ export const getListing = async (req, res, next) => {
 export const getListings = async (req, res, next) => {
   try {
     console.log(req.query);
-    
+
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     const searchTerm = req.query.searchTerm || "";
     const sort = req.query.sort || "createdAt";
     const order = req.query.order === "asc" ? 1 : -1;
-    
+
     const parseBooleanFilter = (filter) => {
       if (filter === undefined || filter === "false") {
         return { $in: [false, true] };
@@ -126,7 +126,7 @@ export const getListings = async (req, res, next) => {
       "amenities.parking": parking,
       "amenities.laundry": laundry,
       "amenities.kitchenEssentials": kitchenEssentials,
-      regularPrice: { $gte: minPrice, $lte: maxPrice }
+      regularPrice: { $gte: minPrice, $lte: maxPrice },
     };
 
     if (homeStyleFilters.length > 0) {
@@ -148,8 +148,6 @@ export const getListings = async (req, res, next) => {
   }
 };
 
-
-
 export const getAll = async (req, res, next) => {
   const listings = await Listing.find();
   return res.status(200).json(listings);
@@ -159,7 +157,7 @@ export const getMortgageCalculations = async (req, res, next) => {
   const {
     purchasePrice,
     downPayment,
-    
+
     annualInterestRate,
     loanTermYears,
     extraPayment,
@@ -211,7 +209,7 @@ export const getMortgageCalculations = async (req, res, next) => {
       interestSaved,
       timeSavedMonths,
       cmhcPremium,
-      principal
+      principal,
     });
   }
 
@@ -226,4 +224,47 @@ const getCMHCRate = (LTV) => {
   else if (LTV > 85 && LTV <= 90) return 0.031;
   else if (LTV > 90 && LTV <= 95) return 0.04;
   else return 0;
+};
+
+export const contactLandlord = async (req, res, next) => {
+  const { message, email } = req.body;
+
+  // Create a transporter object using SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: 'realestatecapstone06@gmail.com',
+      pass: process.env.APP_PASS, // Use App Passwords for security
+    },
+  });
+
+  // Set up email data
+  let mailOptions = {
+    from: 'realestatecapstone06@gmail.com', // sender address
+    to: 'shaneabh777@gmail.com', // list of receivers
+    subject: 'Contact from Website', // Subject line
+    text: message, // plain text body
+    html: `
+        <p>Hello,<p>
+        <br/>
+        <p>You have a messsage from ${email}</p>
+        <br/>
+        <p>${message}</p>
+        <br/>
+        <p>Thank you!</p>
+        <b>Great Homes</b>
+      
+    `, // html body
+  };
+
+  try {
+    // Send mail with defined transport object
+    let info = await transporter.sendMail(mailOptions);
+
+    console.log('Message sent: %s', info.messageId);
+    res.status(200).json({ success: true, message: 'Email sent successfully' });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ success: false, message: 'Internal Server Error' });
+  }
 };

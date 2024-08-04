@@ -5,7 +5,7 @@ const MortgageCalculator = ({ purchasePrice }) => {
 	const [formData, setFormData] = useState({
 		purchasePrice: purchasePrice,
 		downPayment: 0,
-		annualInterestRate: 0,
+		annualInterestRate: 5,
 		loanTermYears: 0,
 		extraPayment: 1000,
 		extraPaymentIntervalYears: 2,
@@ -95,8 +95,9 @@ const MortgageCalculator = ({ purchasePrice }) => {
 									</label>
 									<div className="flex">
 										<input
-											className="px-3 py-2 border rounded outline-none focus:border-blue-500"
-											type="text"
+											className="px-3 py-2 w-full border rounded outline-none focus:border-blue-500"
+											type="number"
+											step={0.1}
 											id="downPaymentPercent"
 											name="downPaymentPercent"
 											placeholder="5%"
@@ -130,8 +131,11 @@ const MortgageCalculator = ({ purchasePrice }) => {
 										className="px-3 py-2 border rounded outline-none focus:border-blue-500"
 										value={formData.loanTermYears}
 										onChange={handleChange}
+										required
 									>
-										<option value="5">5 Years</option>
+										
+										<option value="" >--Select an option--</option>
+										<option value="5">5 years</option>
 										<option value="10">10 Years</option>
 										<option value="15">15 Years</option>
 										<option value="20">20 Years</option>
@@ -151,12 +155,13 @@ const MortgageCalculator = ({ purchasePrice }) => {
 									</label>
 									<input
 										className="px-3 py-2 border rounded outline-none focus:border-blue-500"
-										type="text"
+										type="number"
+										step={.01}
 										id="annualInterestRate"
 										name="annualInterestRate"
 										placeholder="5.09%"
 										min={2}
-										max={100}
+										max={10}
 										value={formData.annualInterestRate}
 										onChange={handleChange}
 									/>

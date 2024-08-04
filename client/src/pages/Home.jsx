@@ -17,6 +17,9 @@ const Home = () => {
 	const [offerListings, setOfferListings] = useState([]);
 	const [saleListings, setSaleListings] = useState([]);
 	const [rentListings, setRentListings] = useState([]);
+
+	
+
 	SwiperCore.use([Navigation]);
 
 	useEffect(() => {
@@ -114,7 +117,7 @@ const Home = () => {
 							</h2>
 							<Link
 								className="text-sm text-blue-800 hover:underline"
-								to={"/search?type=rent"}
+								to={"/search?type=Rent"}
 							>
 								Show more places for rent
 							</Link>
@@ -137,7 +140,7 @@ const Home = () => {
 							</h2>
 							<Link
 								className="text-sm text-blue-800 hover:underline"
-								to={"/search?type=sale"}
+								to={"/search?type=Sale"}
 							>
 								Show more places for sale
 							</Link>

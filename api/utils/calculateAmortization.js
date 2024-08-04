@@ -67,6 +67,9 @@ export const calculateAmortization = (
 
     monthsToPayoff = i;
   }
+  console.log(principal,
+    annualInterestRate,
+    loanTermYears)
 
   return {
     monthlyPayment: monthlyPayment.toFixed(5),

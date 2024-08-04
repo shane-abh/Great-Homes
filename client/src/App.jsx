@@ -15,35 +15,34 @@ import UserLisitings from "./pages/UserLisitings";
 import CreateLisitng2 from "./pages/CreateLisitng2";
 import Listing2 from "./pages/Lisitng2";
 import UpdateLisitng2 from "./pages/UpdateLisitng2";
+import Wishlist from "./pages/Wishlist";
 
 export default function App() {
-	return (
-		<BrowserRouter>
-			<Header />
-			<div className="main-content">
-				<Routes>
-					<Route path="/" element={<Home />}></Route>
-					<Route path="/SignIn" element={<SignIn />}></Route>
-					<Route path="/SignUp" element={<SignUp />}></Route>
-					<Route path="/About" element={<About />}></Route>
-					<Route path='/search' element={<Search />} />
-					<Route path='/myLisitngs' element= {<UserLisitings/> } /> 
-					<Route path="/listing/:listingId" element={<Listing2 />} />
+  return (
+    <BrowserRouter>
+      <Header />
+      <div className="main-content">
+        <Routes>
+          <Route path="/" element={<Home />}></Route>
+          <Route path="/SignIn" element={<SignIn />}></Route>
+          <Route path="/SignUp" element={<SignUp />}></Route>
+          <Route path="/About" element={<About />}></Route>
+          <Route path="/search" element={<Search />} />
+          <Route path="/myLisitngs" element={<UserLisitings />} />
+          <Route path="/listing/:listingId" element={<Listing2 />} />
 
-					<Route element={<PrivateRoute />}>
-						<Route path="/Profile" element={<Profile />}></Route>
-						<Route
-							path="/create-listing"
-							element={<CreateLisitng2 />}
-						/>
-						<Route
-							path="/update-listing/:listingId"
-							element={<UpdateLisitng2 />}
-						/>
-					</Route>
-				</Routes>
-			</div>
-			<Footer />
-		</BrowserRouter>
-	);
+          <Route element={<PrivateRoute />}>
+            <Route path="/Profile" element={<Profile />}></Route>
+            <Route path="/create-listing" element={<CreateLisitng2 />} />
+            <Route
+              path="/update-listing/:listingId"
+              element={<UpdateLisitng2 />}
+            />
+            <Route path="/wishlist" element={<Wishlist />} />
+          </Route>
+        </Routes>
+      </div>
+      <Footer />
+    </BrowserRouter>
+  );
 }
