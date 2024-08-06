@@ -3,7 +3,7 @@ import { MdLocationOn } from "react-icons/md";
 import { USERLISTING_IMG } from "../util/constants";
 
 export default function UserListingItem(listingDetails) {
-	const { listing, setUserListings } = listingDetails
+	const { listing, setUserListings } = listingDetails;
 	const handleListingDelete = async (listingId) => {
 		try {
 			const res = await fetch(`/api/listing/delete/${listingId}`, {
@@ -23,7 +23,7 @@ export default function UserListingItem(listingDetails) {
 		}
 	};
 	return (
-		<div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg w-1/3    m-2">
+		<div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg m-2">
 			<Link to={`/listing/${listing._id}`}>
 				<img
 					src={listing.imageUrls[0] || USERLISTING_IMG}
