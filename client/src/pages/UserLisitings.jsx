@@ -5,11 +5,13 @@ import ListingItem from "../components/ListingItem";
 import UserListingItem from "../components/UserListingItem";
 
 const UserLisitings = () => {
-  
+  const [formData, setFormData] = useState({});
+  const [updateSuccess, setUpdateSuccess] = useState(false);
   const { currentUser, loading, error } = useSelector((state) => state.user);
   const [showListingsError, setShowListingsError] = useState(false);
   const [userListings, setUserListings] = useState([]);
   const dispatch = useDispatch();
+
   const navigate = useNavigate();
 
   const handleShowListings = async () => {

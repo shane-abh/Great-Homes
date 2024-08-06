@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import AmoritizationChart from "../components/AmoritizationChart";
+import { AmortizationChart } from "./AmoritizationChart";
 import MortgageDonutChart from "./MortgageDonutChart";
 
 const MortgageCalculator = ({ purchasePrice }) => {
@@ -323,7 +323,7 @@ const MortgageCalculator = ({ purchasePrice }) => {
       {mortgageData ? (
         <div className="mt-5 lg:mt-20">
           
-          <AmoritizationChart amoritizationData={mortgageData} />
+          <AmortizationChart amoritizationData={mortgageData} />
         </div>
       ) : (
         ""

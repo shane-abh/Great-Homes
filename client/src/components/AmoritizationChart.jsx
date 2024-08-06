@@ -4,7 +4,7 @@ import CanvasJSReact from "@canvasjs/react-charts";
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const AmortizationChart = (amoritizationData) => {
+export const AmortizationChart = (amoritizationData) => {
   const chart = useRef(null);
   // const [chartData, setChartData] = useState({});
   console.log(amoritizationData);
@@ -151,4 +151,4 @@ const AmortizationChart = (amoritizationData) => {
   );
 };
 
-export default AmortizationChart;
+
