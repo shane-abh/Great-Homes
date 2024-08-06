@@ -1,4 +1,4 @@
-import ContactLandlordSchema from "../models/contactlandlord.model";
+import ContactLandlordSchema from "../models/contactlandlord.model.js";
 
 // Mark a listing as contacted
 export const markAsContacted = async (req, res) => {

@@ -2,7 +2,8 @@ import { Link } from "react-router-dom";
 import { MdLocationOn } from "react-icons/md";
 import { USERLISTING_IMG } from "../util/constants";
 
-export default function UserListingItem({ listing, setUserListings }) {
+export default function UserListingItem(listingDetails) {
+	const { listing, setUserListings } = listingDetails
 	const handleListingDelete = async (listingId) => {
 		try {
 			const res = await fetch(`/api/listing/delete/${listingId}`, {

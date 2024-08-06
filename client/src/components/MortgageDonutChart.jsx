@@ -3,7 +3,8 @@ import CanvasJSReact from "@canvasjs/react-charts";
 
 const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 
-const MortgageDonutChart = ({ dataPoints }) => {
+const MortgageDonutChart = (chartData) => {
+  const { dataPoints } = chartData;
   const chartContainerRef = useRef(null);
   //   let dataPoints = [
   //     { y: 377000, label: "Principal" },
@@ -13,23 +14,16 @@ const MortgageDonutChart = ({ dataPoints }) => {
 
   const options = {
     animationEnabled: true,
-    height:300,
-    
-    subtitles: [
-      //   {
-      //     text: "Monthly Payment",
-      //     verticalAlign: "center",
-      //     fontSize: 16,
-      //     dockInsidePlotArea: true,
-      //   },
-    ],
+    height: 300,
+
+    subtitles: [],
     data: [
       {
         type: "pie",
         showInLegend: true,
         legendText: "{label}",
         toolTipContent: "{label}: <strong>{y}</strong>",
-        
+
         dataPoints: dataPoints,
       },
     ],
@@ -38,9 +32,11 @@ const MortgageDonutChart = ({ dataPoints }) => {
     },
   };
 
-  return <div className=" bg-slate-300 h-[300px]">
-  <CanvasJSChart options={options} ref={chartContainerRef} />
-  </div>;
+  return (
+    <div className=" bg-slate-300 h-[300px]">
+      <CanvasJSChart options={options} ref={chartContainerRef} />
+    </div>
+  );
 };
 
 export default MortgageDonutChart;

@@ -10,15 +10,11 @@ import {
   contactLandlord,
 } from "../controllers/listing.controller.js";
 import { verifyToken } from "../utils/verifyUser.js";
-import { body, validationResult } from "express-validator";
+
 
 const router = express.Router();
 
-const stripTags = (input) => {
-  const tempDiv = document.createElement("div");
-  tempDiv.innerHTML = input;
-  return tempDiv.textContent || tempDiv.innerText || "";
-};
+
 
 router.post("/create", verifyToken, createListing);
 router.delete("/delete/:id", verifyToken, deleteListing);

@@ -1,5 +1,5 @@
-import { getContactedListings, markAsContacted } from "../controllers/contactLandlord.route";
-
+import { getContactedListings, markAsContacted } from "../controllers/contactLandlord.route.js";
+import express from 'express';
 
 const router = express.Router();
 

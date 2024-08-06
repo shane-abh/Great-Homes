@@ -1,20 +1,21 @@
 
 import { FormWrapper } from "./FormWrapper";
 
-const PropertyDetailsForm = ({
-  name,
-  description,
-  propertyType,
-  regularPrice,
-  discountPrice,
-  bathrooms,
-  bedrooms,
-  parkings,
-  amenities, // Destructure amenities directly
-  sqFeet,
-  type,
-  updateFields,
-}) => {
+const PropertyDetailsForm = (propertyDetails) => {
+  const {
+    name,
+    description,
+    propertyType,
+    regularPrice,
+    discountPrice,
+    bathrooms,
+    bedrooms,
+    parkings,
+    amenities, 
+    sqFeet,
+    type,
+    updateFields,
+  } = propertyDetails
   const { furnished, parking, laundry, kitchenEssentials } = amenities;
 
   const handleCheckboxChange = (key, value) => {
@@ -75,6 +76,7 @@ const PropertyDetailsForm = ({
               onChange={(e) => updateFields({ propertyType: e.target.value })}
               id="propertyType"
               className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              value={propertyType}
             >
               <option value="">Select an Option</option>
               <option value="Apartment">Apartment</option>

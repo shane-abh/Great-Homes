@@ -1,7 +1,8 @@
-import React from "react";
+
 import { FormWrapper } from "./FormWrapper";
 
-const AddressForm = ({ address, updateFields }) => {
+const AddressForm = (addressDetails) => {
+  const { address, updateFields } = addressDetails
   const { street, city, province, postalCode } = address;
 
   return (
@@ -53,6 +54,7 @@ const AddressForm = ({ address, updateFields }) => {
           onChange={(e) =>
             updateFields({ address: { ...address, province: e.target.value } })
           }
+          value={province}
         >
           <option value="">--Select an option--</option>
           <option value="Alberta">Alberta</option>

@@ -2,7 +2,8 @@ import { useEffect, useState } from "react";
 import { AmortizationChart } from "./AmoritizationChart";
 import MortgageDonutChart from "./MortgageDonutChart";
 
-const MortgageCalculator = ({ purchasePrice }) => {
+const MortgageCalculator = ( calculatorData ) => {
+  const { purchasePrice } = calculatorData;
   const [formData, setFormData] = useState({
     purchasePrice: purchasePrice,
     downPayment: 0,

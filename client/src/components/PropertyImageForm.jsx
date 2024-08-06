@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
+import { useState } from "react";
 import { FormWrapper } from "./FormWrapper";
-import { useSelector } from "react-redux";
+
 import {
   getDownloadURL,
   getStorage,
@@ -8,21 +8,20 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
-import { useNavigate } from "react-router-dom";
 
-const PropertyImageForm = ({ imageUrls, updateFields, ...data }) => {
- 
+const PropertyImageForm = (prevData) => {
+  const { imageUrls, updateFields, ...data } = prevData;
 
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
-  const [loading, setLoading] = useState(false);
+
   const [files, setFiles] = useState([]);
 
-console.log(imageUrls)
- 
+  console.log(imageUrls);
 
   const handleImageSubmit = (e) => {
+    e.preventDefault();
     if (files.length > 0 && files.length + imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -38,9 +37,10 @@ console.log(imageUrls)
           setUploading(false);
         })
         .catch((err) => {
-          console.log(err)
+          console.log(err);
           setImageUploadError("Image upload failed (2 mb max per image)");
           setUploading(false);
+          setError(err)
         });
     } else {
       setImageUploadError("You can only upload 6 images per listing");
@@ -84,7 +84,10 @@ console.log(imageUrls)
     });
   };
   return (
-    <FormWrapper title="Property Images" subTitle="Please add images of the property for better clarity">
+    <FormWrapper
+      title="Property Images"
+      subTitle="Please add images of the property for better clarity"
+    >
       <div className="flex flex-col flex-1 gap-4">
         <p className="font-semibold">
           Images:
@@ -134,7 +137,7 @@ console.log(imageUrls)
               </button>
             </div>
           ))}
-        
+
         {error && <p className="text-red-700 text-sm">{error}</p>}
       </div>
     </FormWrapper>

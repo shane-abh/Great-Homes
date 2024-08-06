@@ -1,27 +1,28 @@
-import React from "react";
 import { FormWrapper } from "./FormWrapper";
 
-const PropertyReview = ({
-  name,
-  description,
-  address,
-  propertyType,
-  regularPrice,
-  discountPrice,
-  bathrooms,
-  bedrooms,
-  parkings,
-  amenities,
-  sqFeet,
-  type,
-  offer,
-  imageUrls,
-  userRef,
-}) => {
+const PropertyReview = (propertyDetails) => {
+  const {
+    name,
+    description,
+    address,
+    propertyType,
+    regularPrice,
+    discountPrice,
+    bathrooms,
+    bedrooms,
+    parkings,
+    amenities,
+    sqFeet,
+
+    imageUrls,
+  } = propertyDetails;
   const { street, city, province, postalCode } = address;
   const { furnished, parking, laundry, kitchenEssentials } = amenities;
   return (
-    <FormWrapper title="Review" subTitle="Please carefully review the property details">
+    <FormWrapper
+      title="Review"
+      subTitle="Please carefully review the property details"
+    >
       <div>
         <h2 className="text-2xl font-bold mt-4 mb-2">Property Details</h2>
         <div className="grid gap-6 grid-cols-1  md:grid-cols-2">
@@ -29,7 +30,7 @@ const PropertyReview = ({
             <h3 className="font-semibold text-black/70">Name</h3>
             <p>{name}</p>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-black/70">Property Type</h3>
             <p>{propertyType}</p>
@@ -39,7 +40,7 @@ const PropertyReview = ({
             <p>Regular Price: ${regularPrice}</p>
             <p>Discount Price: ${discountPrice}</p>
           </div>
-          
+
           <div>
             <h3 className="font-semibold text-black/70">Bathrooms</h3>
             <p> {bathrooms}</p>
@@ -67,7 +68,6 @@ const PropertyReview = ({
             <h3 className="font-semibold text-black/70">Description</h3>
             <p>{description}</p>
           </div>
-          
         </div>
         <h2 className="text-2xl font-bold mt-4 mb-2">Address</h2>
         <div className="flex flex-col gap-2 mb-8">

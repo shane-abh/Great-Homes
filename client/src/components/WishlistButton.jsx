@@ -2,7 +2,8 @@ import  { useState, useEffect } from 'react';
 import heart from '../assets/icons/heart.png'
 import heart_colored from '../assets/icons/heart_colored.png';
 
-const WishlistButton = ({ listingId, userId }) => {
+const WishlistButton = (wishlistDetails) => {
+  const { listingId, userId } = wishlistDetails
   const [isInWishlist, setIsInWishlist] = useState(false);
 
   useEffect(() => {

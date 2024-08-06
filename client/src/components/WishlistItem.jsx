@@ -3,8 +3,9 @@ import { MdLocationOn } from "react-icons/md";
 import { USERLISTING_IMG } from "../util/constants";
 import { useSelector } from "react-redux";
 
-export default function WishlistItem({ listing, setWishlist }) {
-    const { currentUser } = useSelector((state) => state.user);
+export default function WishlistItem(wishlistDetails) {
+  const { listing, setWishlist } = wishlistDetails;
+  const { currentUser } = useSelector((state) => state.user);
   const removeFromWishlist = async (listingId) => {
     try {
       const res = await fetch("/api/wishlist/remove", {

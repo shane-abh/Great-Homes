@@ -1,47 +1,33 @@
 import { useRef } from "react";
-import { useSelector } from "react-redux";
 
-
-
-const ContactLandlord = ({listingDetails}) => {
+const ContactLandlord = (listingDetails) => {
   const messageRef = useRef();
-  const { currentUser } = useSelector((state) => state.user);
-  console.log(listingDetails.contactEmail)
+  const listingDetail = listingDetails.listingDetails;
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = messageRef.current.value;
 
     try {
-      const response = await fetch('/api/listing/contactLandlord', {
-        method: 'POST',
+      const response = await fetch("/api/listing/contactLandlord", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message, email: listingDetails.contactEmail }),
+        body: JSON.stringify({ message, email: listingDetail.contactEmail }),
       });
 
       if (response.ok) {
         const data = await response.json();
-        console.log('Success:', data);
-
-        
+        console.log(data)
       } else {
-        console.error('Error:', response.statusText);
+        console.error("Error:", response.statusText);
       }
-
-     
-      
-     
     } catch (error) {
-      console.error('Fetch error:', error);
+      console.error("Fetch error:", error);
     }
   };
 
-  
-
-  
-
-  
   return (
     <div className="p-4 shadow-lg rounded-md bg-slate-50 flex flex-col justify-between h-full">
       <h1 className="mb-4 text-2xl leading-none tracking-tight text-gray-900 md:text-3xl">

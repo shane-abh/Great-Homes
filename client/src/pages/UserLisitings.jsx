@@ -1,16 +1,13 @@
-import React, { useEffect, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-import ListingItem from "../components/ListingItem";
+
 import UserListingItem from "../components/UserListingItem";
 
 const UserLisitings = () => {
-  const [formData, setFormData] = useState({});
-  const [updateSuccess, setUpdateSuccess] = useState(false);
-  const { currentUser, loading, error } = useSelector((state) => state.user);
-  const [showListingsError, setShowListingsError] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
+
   const [userListings, setUserListings] = useState([]);
-  const dispatch = useDispatch();
 
   const navigate = useNavigate();
 
@@ -19,16 +16,14 @@ const UserLisitings = () => {
       navigate("/signin");
     }
     try {
-      setShowListingsError(false);
       const res = await fetch(`/api/user/listings/${currentUser._id}`);
       const data = await res.json();
       if (data.success === false) {
-        setShowListingsError(true);
         return;
       }
       setUserListings(data);
     } catch (error) {
-      setShowListingsError(true);
+      alert(error);
     }
   };
 
