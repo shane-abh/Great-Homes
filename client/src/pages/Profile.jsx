@@ -124,8 +124,9 @@ export default function Profile() {
 	};
 
 	return (
-		<div className=" w-[90vw] sm:w-[70vw] md:w-[50vw] mx-auto my-[2vh]">
-			<div className="bg-primary w-full  rounded-lg flex-col justify-center p-8 sm:p-10 md:p-15 ">
+		<div className="bg-[url('./assets/profile-bg.jpg')] bg-no-repeat bg-cover bg-center w-[90vw] sm:w-[70vw] md:w-[50vw] mx-auto my-[2vh] relative">
+			<div className="absolute inset-0 bg-black opacity-50 rounded-sm"></div>
+			<div className="relative bg-auto bg-no-repeat bg-center w-full rounded-lg flex-col justify-center p-8 sm:p-10 md:p-15 z-10">
 				<h1 className="text-white text-center text-2xl md:text-3xl font-semibold my-4 mb8">
 					Profile
 				</h1>
@@ -134,15 +135,15 @@ export default function Profile() {
 						<img
 							src={user_avatar}
 							alt="Profile Image"
-							className="w-30  my-5 w-1/2 md:w-1/5  xl:w-[5vw]"
+							className="w-30 my-5 w-1/2 md:w-1/5 xl:w-[5vw]"
 						/>
 					</div>
 
 					{/* Inputs  */}
 
-					<div className="flex-col  justify-center  items-center   lg:mt-10">
+					<div className="flex-col justify-center items-center lg:mt-10">
 						<input
-							className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
+							className="bg-white my-2 md:my-2 p-2 w-full rounded-sm"
 							placeholder="Username"
 							type="text"
 							name="username"
@@ -151,7 +152,7 @@ export default function Profile() {
 							onChange={handleChange}
 						/>
 						<input
-							className="bg-white my-4 md:my-2 p-2 w-full rounded-lg"
+							className="bg-white my-1 md:my-2 p-2 w-full rounded-sm"
 							placeholder="Email"
 							type="email"
 							name="email"
@@ -160,7 +161,7 @@ export default function Profile() {
 							onChange={handleChange}
 						/>
 						<input
-							className="bg-white  mb-0 md:my-4 p-2 w-full rounded-lg"
+							className="bg-white mb-0 md:my-2 p-2 w-full rounded-sm"
 							placeholder="Password"
 							type="password"
 							name="password"
@@ -174,7 +175,7 @@ export default function Profile() {
 					<div className="mt-5 ">
 						<input
 							disabled={loading}
-							className="focus:outline-none w-full text-primary bg-secondary  font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:focus:ring-yellow-900"
+							className="focus:outline-none w-full text-primary bg-secondary font-bold rounded-lg text-sm px-5 py-2.5 me-2 mb-6 dark:focus:ring-yellow-900 cursor-pointer"
 							type="submit"
 							value={loading ? "Loading..." : "Update Profile"}
 						/>
@@ -197,13 +198,13 @@ export default function Profile() {
 				<div className="w-full flex md:flex-row flex-col  justify-between text-white text-sm font-bold md:px-2 mt-8">
 					<button
 						onClick={handleDeleteUser}
-						className="bg-[#F52314] my-4 md:my-0 p-2 rounded-md"
+						className="bg-primary my-4 md:my-0 p-2 rounded-md"
 					>
 						Delete Account
 					</button>
 					<button
 						onClick={handleSignOut}
-						className="bg-[#7e2d21] p-2 rounded-md"
+						className="bg-primary p-2 rounded-md"
 					>
 						Sign Out
 					</button>

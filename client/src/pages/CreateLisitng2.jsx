@@ -122,6 +122,7 @@ const CreateLisitng2 = () => {
         body: JSON.stringify({
           ...data,
           userRef: currentUser._id,
+          contactEmail: currentUser.email
         }),
       });
       const data2 = await res.json();

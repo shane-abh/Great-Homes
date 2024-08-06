@@ -1,17 +1,16 @@
+import Logo from "./Logo";
+
 const Footer = () => {
 	return (
-		<footer className="bg-primary  shadow  ">
+		<footer className="bg-primary shadow dark:bg-black">
 			<div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
 				<div className="sm:flex sm:items-center sm:justify-between">
-					<h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-						<span className="text-white">Great</span>
-						<span className="text-slate-400">Homes</span>
-					</h1>
+					<Logo />
 					<ul className="flex flex-wrap items-center mb-6 text-sm font-medium text-gray-500 sm:mb-0 dark:text-gray-400">
 						<li>
 							<a
 								href="#"
-								className="hover:underline me-4 md:me-6"
+								className="hover:underline me-4 md:me-6 dark:text-white"
 							>
 								About
 							</a>
@@ -19,13 +18,16 @@ const Footer = () => {
 						<li>
 							<a
 								href="#"
-								className="hover:underline me-4 md:me-6"
+								className="hover:underline me-4 md:me-6 dark:text-white"
 							>
 								Privacy Policy
 							</a>
 						</li>
 						<li>
-							<a href="#" className="hover:underline">
+							<a
+								href="#"
+								className="hover:underline dark:text-white"
+							>
 								Contact
 							</a>
 						</li>
