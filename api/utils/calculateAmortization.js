@@ -72,8 +72,8 @@ export const calculateAmortization = (
     loanTermYears)
 
   return {
-    monthlyPayment: monthlyPayment.toFixed(5),
-    totalInterestPaid: totalInterestPaid.toFixed(5),
+    monthlyPayment: monthlyPayment.toFixed(2),
+    totalInterestPaid: totalInterestPaid.toFixed(2),
     monthsToPayoff: monthsToPayoff,
     amortizationSchedule: schedule,
     

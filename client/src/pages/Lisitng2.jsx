@@ -32,7 +32,8 @@ export default function Listing2() {
   const params = useParams();
 
   const { currentUser } = useSelector((state) => state.user);
-  const userId = currentUser._id;
+
+
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -103,10 +104,10 @@ export default function Listing2() {
               </TabList>
 
               <TabPanel>
-                <div className="flex flex-col max-w-5xl mx-auto p-3 my-7 gap-4">
+                <div className="flex flex-col max-w-5xl mx-auto p-3 my-7 gap-4 k">
                   {/* Description and Contact Landlord */}
-                  <div className="flex flex-col md:flex-row gap-4 ">
-                    <div className="md:w-4/6 flex flex-col max-w-5xl  p-3  md:gap-6">
+                  <div className="flex flex-col md:flex-row gap-4 h-full">
+                    <div className="md:w-4/6 flex flex-col max-w-5xl  px-3  md:gap-6">
                       <div className="bg-slate-50 rounded-lg p-4">
                         <div className="flex justify-between items-center">
                           <p className="text-2xl font-semibold ">
@@ -116,10 +117,14 @@ export default function Listing2() {
                               : listing.regularPrice.toLocaleString("en-US")}
                             {listing.type === "rent" && " / month"}
                           </p>
-                          <WishlistButton
-                            listingId={listing._id}
-                            userId={userId}
-                          />
+                          {currentUser ? (
+                            <WishlistButton
+                              listingId={listing._id}
+                              userId={currentUser._id}
+                            />
+                          ) : (
+                            ""
+                          )}
                         </div>
                         <p className="flex items-center mt-6 gap-2 text-slate-600 text-sm">
                           <FaMapMarkerAlt className="text-green-700" />
@@ -175,11 +180,15 @@ export default function Listing2() {
                       </div>
                     </div>
                     <div className="md:w-2/6 ">
-                      {currentUser &&
-                        listing.userRef !== currentUser._id &&
-                        !contact && (
-                          <ContactLandlord email={listing.contactEmail} />
-                        )}
+                      {currentUser && listing.userRef !== currentUser._id ? (
+                        <ContactLandlord listingDetails={listing} />
+                      ) : (
+                        <div className="p-4 shadow-lg rounded-md bg-slate-50 flex flex-col justify-between  ">
+                          <p className="text-center">
+                            Sign up to contact landlord
+                          </p>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>

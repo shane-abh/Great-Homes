@@ -13,6 +13,7 @@ const wishlistSchema = new mongoose.Schema(
         ref: 'Listing',
         required: true,
       },
+      
     ],
   },
   { timestamps: true }

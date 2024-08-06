@@ -1,13 +1,10 @@
 import Listing from "../models/lisitng.model.js";
 import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
-import nodemailer from 'nodemailer'
+import nodemailer from "nodemailer";
 
 export const createListing = async (req, res, next) => {
-  // const errors = validationResult(req);
-  // if (!errors.isEmpty()) {
-  //   return res.status(400).json({ errors: errors.array() });
-  // }
+
 
   try {
     const listing = await Listing.create(req.body);
@@ -217,7 +214,7 @@ export const getMortgageCalculations = async (req, res, next) => {
 };
 
 const getCMHCRate = (LTV) => {
-  if (LTV > 0 && LTV <= 65) return 0.006;
+  if (LTV >= 0 && LTV <= 65) return 0.006;
   else if (LTV > 65 && LTV <= 75) return 0.015;
   else if (LTV > 75 && LTV <= 80) return 0.024;
   else if (LTV > 80 && LTV <= 85) return 0.028;
@@ -231,18 +228,18 @@ export const contactLandlord = async (req, res, next) => {
 
   // Create a transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
-    service: 'gmail',
+    service: "gmail",
     auth: {
-      user: 'realestatecapstone06@gmail.com',
+      user: "realestatecapstone06@gmail.com",
       pass: process.env.APP_PASS, // Use App Passwords for security
     },
   });
 
   // Set up email data
   let mailOptions = {
-    from: 'realestatecapstone06@gmail.com', // sender address
-    to: 'shaneabh777@gmail.com', // list of receivers
-    subject: 'Contact from Website', // Subject line
+    from: "realestatecapstone06@gmail.com", // sender address
+    to: "shaneabh777@gmail.com", // list of receivers
+    subject: "Contact from Website", // Subject line
     text: message, // plain text body
     html: `
         <p>Hello,<p>
@@ -261,10 +258,10 @@ export const contactLandlord = async (req, res, next) => {
     // Send mail with defined transport object
     let info = await transporter.sendMail(mailOptions);
 
-    console.log('Message sent: %s', info.messageId);
-    res.status(200).json({ success: true, message: 'Email sent successfully' });
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({ success: true, message: "Email sent successfully" });
   } catch (error) {
-    console.error('Error sending email:', error);
-    res.status(500).json({ success: false, message: 'Internal Server Error' });
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };

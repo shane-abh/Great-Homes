@@ -61,6 +61,7 @@ const INITIAL_DATA = {
   offer: false,
   imageUrls: [""],
   userRef: "",
+  contactedLandlord: false
 };
 
 const UpdateLisitng2 = () => {
@@ -103,10 +104,11 @@ const UpdateLisitng2 = () => {
   async function onSubmit(e) {
     e.preventDefault();
     if (!isLastStep) return next();
-    alert("Successful Account Creation");
+    
     setLoading(true);
       setError(false);
-      const res = await fetch("/api/listing/create", {
+      const listingId = params.listingId;
+      const res = await fetch(`/api/listing/update/${listingId}`, {
         method: "post",
         headers: {
           "Content-Type": "application/json",

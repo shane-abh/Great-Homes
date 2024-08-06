@@ -5,6 +5,7 @@ import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
 import wishlistRouter from './routes/wishlist.route.js'
+import contactLandlordRouter from './routes/contactLandlord.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
 
@@ -36,6 +37,7 @@ app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
 app.use('/api/wishlist', wishlistRouter)
+app.use('/api/contactLandlord', contactLandlordRouter)
 
 
 app.use(express.static(path.join(__dirname, '/client/dist')));

@@ -7,4 +7,5 @@ router.post('/add', addToWishlist);
 router.post('/remove', removeFromWishlist);
 router.get('/:userId', getWishlist);
 
+
 export default router;
