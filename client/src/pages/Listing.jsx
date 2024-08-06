@@ -13,7 +13,7 @@ import {
   FaParking,
   FaShare,
 } from "react-icons/fa";
-import AmoritizationChart from "../components/AmoritizationChart";
+
 import MortgageCalculator from "../components/MortgageCalculator";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";
