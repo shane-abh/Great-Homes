@@ -1,10 +1,18 @@
+import sitelogoTwo from "../assets/sitelogoTwo.png";
+
 const Logo = () => {
 	return (
 		<div>
-			<h1 className="font-bold text-sm sm:text-xl flex flex-wrap">
-				<span className="text-secondary">Great</span>
-				<span className="text-slate-500">Homes</span>
-			</h1>
+			<a
+				className="flex items-center gap-2 cursor-pointer"
+				href=""
+				target="self"
+			>
+				<img src={sitelogoTwo} alt="Great Homes" />
+				<span className="font-bold hover:text-primary">
+					Great Homes
+				</span>
+			</a>
 		</div>
 	);
 };

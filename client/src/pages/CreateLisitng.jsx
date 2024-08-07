@@ -9,31 +9,31 @@ import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 
 const INITIAL_DATA = {
-  name: "", // name of house/villa/apartment
-  description: "",
-  address: {
-    street: "",
-    city: "",
-    province: "",
-    postalCode: "",
-  },
-  propertyType: "", // villa/bungalow/apartment/condominium
-  regularPrice: 0,
-  discountPrice: 0,
-  bathrooms: 0,
-  bedrooms: 0,
-  parkings: 0,
-  amenities: {
-    furnished: false,
-    parking: false,
-    laundry: false,
-    kitchenEssentials: false,
-  },
-  sqFeet: 0,
-  type: "",
-  offer: false,
-  imageUrls: [],
-  userRef: "",
+	name: "", // name of house/villa/apartment
+	description: "",
+	address: {
+		street: "",
+		city: "",
+		province: "",
+		postalCode: "",
+	},
+	propertyType: "", // villa/bungalow/apartment/condominium
+	regularPrice: 0,
+	discountPrice: 0,
+	bathrooms: 0,
+	bedrooms: 0,
+	parkings: 0,
+	amenities: {
+		furnished: false,
+		parking: false,
+		laundry: false,
+		kitchenEssentials: false,
+	},
+	sqFeet: 0,
+	type: "",
+	offer: false,
+	imageUrls: [],
+	userRef: "",
 };
 
 const isValidPostalCode = (postalCode) => {
@@ -174,22 +174,22 @@ export const CreateLisitng = () => {
 
     if (!isLastStep) return next();
 
-    const res = await fetch("/api/listing/create", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...data,
-        userRef: currentUser._id,
-        contactEmail: currentUser.email,
-      }),
-    });
-    const data2 = await res.json();
+		const res = await fetch("/api/listing/create", {
+			method: "post",
+			headers: {
+				"Content-Type": "application/json",
+			},
+			body: JSON.stringify({
+				...data,
+				userRef: currentUser._id,
+				contactEmail: currentUser.email,
+			}),
+		});
+		const data2 = await res.json();
 
-    console.log(data2);
-    navigate(`/listing/${data2._id}`);
-  }
+		console.log(data2);
+		navigate(`/listing/${data2._id}`);
+	}
 
   return (
     <div className="bg-[#F6F6F6]">
