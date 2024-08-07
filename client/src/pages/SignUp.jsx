@@ -67,11 +67,11 @@ export default function SignUp() {
 							<div className="col-span-2 sm:col-span-1 md:col-span-2 bg-gray-50 h-auto md:h-full flex flex-col">
 								<a
 									href=""
-									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"
+									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow cursor-text"
 								>
 									<img
 										src={SIGNUP_URLS.IMAGE_1}
-										alt=""
+										alt="Cityscape at night"
 										className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
@@ -80,14 +80,14 @@ export default function SignUp() {
 				</h3> */}
 								</a>
 							</div>
-							<div className="col-span-2 sm:col-span-1 md:col-span-2 bg-stone-50">
+							<div className="col-span-2 sm:col-span-1 md:col-span-2 ">
 								<a
 									href=""
-									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4"
+									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 mb-4 cursor-text"
 								>
 									<img
 										src={SIGNUP_URLS.IMAGE_2}
-										alt=""
+										alt="A man looking at property documents with realtor and family"
 										className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
@@ -98,11 +98,11 @@ export default function SignUp() {
 								<div className="grid gap-4 grid-cols-1">
 									<a
 										href=""
-										className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40"
+										className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 cursor-text"
 									>
 										<img
 											src={SIGNUP_URLS.IMAGE_3}
-											alt=""
+											alt="A couple holding the sold sign"
 											className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
 										/>
 										<div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
@@ -115,11 +115,11 @@ export default function SignUp() {
 							<div className="col-span-2 sm:col-span-2 md:col-span-2 bg-sky-50 h-auto md:h-full flex flex-col">
 								<a
 									href=""
-									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow"
+									className="group relative flex flex-col overflow-hidden rounded-lg px-4 pb-4 pt-40 flex-grow cursor-text"
 								>
 									<img
 										src={SIGNUP_URLS.IMAGE_4}
-										alt=""
+										alt="A happy family in a house along with the realtor"
 										className="absolute inset-0 h-full w-full object-cover group-hover:scale-105 transition-transform duration-500 ease-in-out"
 									/>
 									<div className="absolute inset-0 bg-gradient-to-b from-gray-900/25 to-gray-900/5"></div>
