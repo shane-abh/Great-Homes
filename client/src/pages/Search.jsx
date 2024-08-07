@@ -72,14 +72,26 @@ export default function Search() {
 
   const handleChange = (e) => {
     const { id, value, checked, type } = e.target;
-    setSidebardata((prev) => ({
-      ...prev,
-      [id]: type === "checkbox" ? checked : value,
-    }));
+   
+    if (type === "radio") {
+      setSidebardata((prev) => ({
+        ...prev,
+        type: value,
+      }));
+    } else {
+      setSidebardata((prev) => ({
+        ...prev,
+        [id]: type === "checkbox" ? checked : value,
+      }));
+    }
+    
   };
+
+ 
 
   const handleSubmit = (e) => {
     e.preventDefault();
+    
     const urlParams = new URLSearchParams();
     for (const key in sidebardata) {
       if (typeof sidebardata[key] === "boolean") {
@@ -88,6 +100,7 @@ export default function Search() {
         urlParams.set(key, sidebardata[key]);
       }
     }
+    
     navigate(`/search?${urlParams.toString()}`);
   };
 
@@ -101,14 +114,31 @@ export default function Search() {
     setListings((prev) => [...prev, ...data]);
   };
 
+  const renderRadioButton = (id, label) => (
+    <div className="flex items-center gap-2" key={id}>
+      <input
+        type="radio"
+        id={id}
+        
+        name="propertyType"
+        className="w-5 checked:bg-primary bg-primary/50 "
+        onChange={handleChange}
+        value={id}
+        checked={sidebardata.type === id}
+      />
+      <span>{label}</span>
+    </div>
+  );
+
   const renderCheckbox = (id, label) => (
-    <div className="flex gap-2">
+    <div className="flex items-center gap-2">
       <input
         type="checkbox"
         id={id}
-        className="w-5"
+        className="w-5 checked:bg-primary bg-primary/50"
         onChange={handleChange}
         checked={sidebardata[id]}
+        
       />
       <span>{label}</span>
     </div>
@@ -137,10 +167,10 @@ export default function Search() {
             />,
           ])}
           {renderFormSection("Property Type", [
-            renderCheckbox("all", "Rent & Sale"),
-            renderCheckbox("Rent", "Rent"),
-            renderCheckbox("Sale", "Sale"),
-            renderCheckbox("offer", "Offer"),
+           renderRadioButton("all", "All"),
+           renderRadioButton("Rent", "Rent"),
+           renderRadioButton("Sale", "Sale"),
+          //  renderRadioButton("offer", "Offer"),
           ])}
           {renderFormSection("Style of Home", [
             renderCheckbox("apartment", "Apartment"),
