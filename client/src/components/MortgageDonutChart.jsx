@@ -14,7 +14,7 @@ const MortgageDonutChart = (chartData) => {
 
   const options = {
     animationEnabled: true,
-    height: 300,
+    height: 350,
 
     subtitles: [],
     data: [

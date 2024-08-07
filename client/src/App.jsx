@@ -10,7 +10,7 @@ import PrivateRoute from "./components/PrivateRoute";
 import {Listing} from "./pages/Lisitng";
 import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
-import { UpdateLisitng } from "./pages/UpdateLisitng2";
+import { UpdateLisitng } from "./pages/UpdateLisitng";
 import Wishlist from "./pages/Wishlist";
 import { CreateLisitng } from "./pages/CreateLisitng";
 import Contact from "./pages/Contact";

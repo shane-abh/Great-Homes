@@ -4,9 +4,24 @@ const ContactLandlord = (listingDetails) => {
   const messageRef = useRef();
   const listingDetail = listingDetails.listingDetails;
 
+  const hasSpecialCharacters = (str) => {
+    const pattern = /[^a-zA-Z0-9\s]/;
+    return pattern.test(str);
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const message = messageRef.current.value;
+
+    if (message.length === 0) {
+      alert("Message cannot be empty.");
+      return;
+    }
+
+    if (hasSpecialCharacters(message)) {
+      alert("Special characters are not allowed in the message.");
+      return;
+    }
 
     try {
       const response = await fetch("/api/listing/contactLandlord", {
@@ -19,7 +34,7 @@ const ContactLandlord = (listingDetails) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data)
+        console.log(data);
       } else {
         console.error("Error:", response.statusText);
       }

@@ -12,7 +12,7 @@ const AddressForm = (addressDetails) => {
           htmlFor="street"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          Street
+          Street*
         </label>
         <input
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2.5 "
@@ -29,7 +29,7 @@ const AddressForm = (addressDetails) => {
           htmlFor="city"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          City
+          City*
         </label>
         <input
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2.5 "
@@ -45,7 +45,7 @@ const AddressForm = (addressDetails) => {
           htmlFor="province"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          Province
+          Province*
         </label>
 
         <select
@@ -77,7 +77,7 @@ const AddressForm = (addressDetails) => {
           htmlFor="postalCode"
           className="block mb-2 text-sm font-medium text-gray-900"
         >
-          Postal Code
+          Postal Code*
         </label>
         <input
           className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 mb-2.5 "
@@ -85,6 +85,7 @@ const AddressForm = (addressDetails) => {
           type="text"
           id="postalCode"
           value={postalCode}
+          pattern="^[A-Za-z]\d[A-Za-z][ -]?\d[A-Za-z]\d$"
           onChange={(e) =>
             updateFields({
               address: { ...address, postalCode: e.target.value },

@@ -72,13 +72,13 @@ const MortgageCalculator = ( calculatorData ) => {
 
   return (
     <div className="flex flex-col p-2 border rounded-md ">
-      <div className="rounded-lg ">
+      <div className="  rounded-lg ">
         <div
-          className={`grid   grid-cols-1 lg:${
+          className={`grid    grid-cols-1 lg:${
             mortgageData ? "grid-cols-3" : "grid-cols-1"
-          } grid-rows-1 transition ease-in-out delay-150`}
+          } `}
         >
-          <div id="calculatorForm">
+          <div id="calculatorForm" className="md:col-span-1">
             <form onSubmit={handleSubmit}>
               <div className="bg-slate-100 p-4 shadow-md flex flex-col mb-4 font-semibold rounded-md">
                 <div className="flex flex-col">
@@ -208,12 +208,12 @@ const MortgageCalculator = ( calculatorData ) => {
           </div>
 
           {mortgageData ? (
-            <div id="results" className=" px-4 md:col-span-2">
-              <h1 className="text-center font-bold text-2xl">
+            <div id="results" className=" p-4 md:col-span-2 mt-8  rounded-lg">
+              <h1 className="text-center font-bold text-2xl mb-8">
                 Standard Amortization
               </h1>
               <div className="grid grid-rows-2  ">
-                <div className="flex flex-col lg:flex-row  lg:gap-5 gap-20   ">
+                <div className="flex flex-col lg:flex-row  lg:justify-between lg:gap-5 gap-0   ">
                   <div className=" w-full lg:w-3/6">
                     <MortgageDonutChart
                       dataPoints={[
@@ -232,8 +232,9 @@ const MortgageCalculator = ( calculatorData ) => {
                       ]}
                     />
                   </div>
-                  <div className="   flex items-center   ">
-                    <div className="bg-slate-100 rounded-md p-4  flex  flex-col  gap-1.5 w-full">
+                  <div className="   flex  items-center   ">
+                    <div className="bg-slate-100 rounded-md p-4  flex  flex-col   gap-1.5 w-full">
+                      <h2 className="text-lg font-bold py-4">Payment Summary</h2>
                       <div className="flex justify-between gap-x-4">
                         <p>Monthly Payment</p>
                         <p className="font-bold">
@@ -243,7 +244,7 @@ const MortgageCalculator = ( calculatorData ) => {
                                 parseFloat(
                                   mortgageData.standardAmortization
                                     .monthlyPayment
-                                ).toFixed(2)
+                                ).toFixed(0)
                               )
                             : "$0"}
                         </p>
@@ -255,12 +256,12 @@ const MortgageCalculator = ( calculatorData ) => {
                           {mortgageData != 0
                             ? "$" +
                               formatter.format(
-                                parseFloat(mortgageData.cmhcPremium).toFixed(2)
+                                parseFloat(mortgageData.cmhcPremium).toFixed(0)
                               )
                             : "$0"}
                         </p>
                       </div>
-                      <div className="flex justify-between gap-x-5">
+                      <div className="flex justify-between gap-x-6">
                         <p>Total Interest Payment</p>
                         <p className="font-bold">
                           {mortgageData != 0
@@ -269,7 +270,7 @@ const MortgageCalculator = ( calculatorData ) => {
                                 parseFloat(
                                   mortgageData.standardAmortization
                                     .totalInterestPaid
-                                ).toFixed(2)
+                                ).toFixed(0)
                               )
                             : "$0"}
                         </p>
@@ -286,12 +287,14 @@ const MortgageCalculator = ( calculatorData ) => {
                         </p>
                       </div>
                     </div>
+                    
+                    
                   </div>
                 </div>
 
                 <div className="flex flex-col lg:items-center lg:flex-row mt-10   ">
-                  <div className="bg-slate-100 p-4 rounded-lg">
-                    <h3 className="font-semibold py-4 text-xl">
+                  <div className="bg-slate-100 p-4 rounded-lg w-full">
+                    <h3 className="font-semibold py-4 text-lg">
                       Recommendation
                     </h3>
                     <p className="font-medium text-lg ">

@@ -26,7 +26,7 @@ export default function Contact() {
     form.append('Message', formData.Message);
 
     fetch(scriptURL, { method: 'POST', body: form })
-      .then(response => {
+      .then( response => {
         setMsg('Message Sent Successfully. We will get back to you shortly.');
         setTimeout(() => setMsg(''), 5000);
         setFormData({ Name: '', Email: '', Phone: '', Message: '' });

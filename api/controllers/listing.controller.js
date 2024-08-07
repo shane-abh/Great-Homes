@@ -3,9 +3,8 @@ import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
 import nodemailer from "nodemailer";
 
+
 export const createListing = async (req, res, next) => {
-
-
   try {
     const listing = await Listing.create(req.body);
     return res.status(201).json(listing);
@@ -226,6 +225,7 @@ const getCMHCRate = (LTV) => {
 export const contactLandlord = async (req, res, next) => {
   const { message, email } = req.body;
 
+  
   // Create a transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
     service: "gmail",
@@ -242,14 +242,77 @@ export const contactLandlord = async (req, res, next) => {
     subject: "Contact from Website", // Subject line
     text: message, // plain text body
     html: `
-        <p>Hello,<p>
+        <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Real Estate</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f6f6f6;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .container {
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          max-width: 600px;
+          width: 100%;
+        }
+        .image {
+          width: 100%;
+          border-radius: 10px;
+        }
+        .title {
+          font-size: 24px;
+          color: #333;
+          margin: 20px 0;
+        }
+        .description {
+          font-size: 16px;
+          color: #666;
+          margin: 20px 0;
+        }
+        .button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #ff5722;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+        .button:hover {
+          background-color: #e64a19;
+        }
+      </style>
+    </head>
+    <body>
+    <p>Hi,</p>
+      <div class="container">
+        
+        <h1 class="title">You have an enquiry from Great Homes</h1>
+        <p class="description">
+          Hi, You have a message from ${email}.
+          <br />
+          ${message}
+        </p>
         <br/>
-        <p>You have a messsage from ${email}</p>
-        <br/>
-        <p>${message}</p>
-        <br/>
-        <p>Thank you!</p>
-        <b>Great Homes</b>
+        <p>Best regards,<br />
+        Great Homes</p>
+
+      </div>
+    </body>
+    </html>
       
     `, // html body
   };

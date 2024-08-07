@@ -1,9 +1,12 @@
 import { useState } from "react";
 
-export function useMultistepForm(steps) {
+export function useMultistepForm(steps, validateStep) {
   const [currentStepIndex, setCurrentStepIndex] = useState(0);
 
   function next() {
+    if (validateStep && !validateStep(currentStepIndex)) {
+      return;
+    }
     setCurrentStepIndex((i) => {
       if (i >= steps.length - 1) return i;
       return i + 1;
