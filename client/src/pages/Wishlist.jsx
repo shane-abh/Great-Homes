@@ -28,7 +28,7 @@ const Wishlist = () => {
 				</h1>
 			</div>
 
-			<div className="flex justify-start">
+			<div className="flex  justify-start">
 				<div className="flex flex-wrap gap-4 ">
 					{wishlist.map((listing) => (
 						<WishlistItem

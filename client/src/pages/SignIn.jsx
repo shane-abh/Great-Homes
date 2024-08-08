@@ -145,9 +145,7 @@ export default function SignIn() {
 									required
 								/>
 							</div>
-							{/* <div className="w-full  flex flex-row-reverse my-2  lg:my-0">
-              <a className="text-white text-sm">Forgot Password?</a>
-            </div> */}
+							
 
 							{/* Buttons */}
 

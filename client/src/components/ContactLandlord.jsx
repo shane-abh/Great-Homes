@@ -1,8 +1,9 @@
-import { useRef } from "react";
+import { useRef, useState } from "react";
 
 const ContactLandlord = (listingDetails) => {
   const messageRef = useRef();
   const listingDetail = listingDetails.listingDetails;
+  const [isContacted, setIsContacted] = useState(false);
 
   const hasSpecialCharacters = (str) => {
     const pattern = /[^a-zA-Z0-9\s]/;
@@ -34,9 +35,13 @@ const ContactLandlord = (listingDetails) => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log(data);
+        if (data) {
+          setIsContacted(true);
+          messageRef.current.value = "";
+        }
       } else {
         console.error("Error:", response.statusText);
+        setIsContacted(false);
       }
     } catch (error) {
       console.error("Fetch error:", error);
@@ -49,25 +54,33 @@ const ContactLandlord = (listingDetails) => {
         Contact Landlord
       </h1>
       <div className="flex-grow">
-        <form
-          method="POST"
-          onSubmit={handleSubmit}
-          className="flex flex-col h-full"
-        >
-          <textarea
-            ref={messageRef}
-            placeholder="Please enter your message here"
-            name="message"
-            id="message"
-            className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 my-2.5 flex-grow"
-            required
-          ></textarea>
-          <input type="hidden" name="email" value={listingDetails.email} />
-          <input
-            type="submit"
-            className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
-          />
-        </form>
+        {!isContacted ? (
+          <form
+            method="POST"
+            onSubmit={handleSubmit}
+            className="flex flex-col h-full"
+          >
+            <textarea
+              ref={messageRef}
+              placeholder="Please enter your message here"
+              name="message"
+              id="message"
+              className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 my-2.5 flex-grow"
+              required
+            ></textarea>
+            <input type="hidden" name="email" value={listingDetails.email} />
+            <input
+              type="submit"
+              className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+            />
+          </form>
+        ) : (
+          <div>
+            <span className="text-green-600 font-semibold">
+              Your message has been sent successfully to the landlord.
+            </span>
+          </div>
+        )}
       </div>
     </div>
   );

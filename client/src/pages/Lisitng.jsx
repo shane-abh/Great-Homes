@@ -31,6 +31,7 @@ export const Listing = () => {
   const params = useParams();
 
   const { currentUser } = useSelector((state) => state.user);
+  console.log(currentUser)
 
   useEffect(() => {
     const fetchListing = async () => {
@@ -178,7 +179,7 @@ export const Listing = () => {
                       </div>
                     </div>
                     <div className="md:w-2/6 ">
-                      {currentUser && listing.userRef !== currentUser._id ? (
+                      {currentUser ? (
                         <ContactLandlord listingDetails={listing} />
                       ) : (
                         <div className="p-4 shadow-lg rounded-md bg-slate-50 flex flex-col justify-between  ">

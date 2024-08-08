@@ -14,6 +14,7 @@ const PropertyDetailsForm = (propertyDetails) => {
     sqFeet,
     type,
     updateFields,
+    errors,
   } = propertyDetails;
   const { furnished, parking, laundry, kitchenEssentials } = amenities;
 
@@ -42,7 +43,7 @@ const PropertyDetailsForm = (propertyDetails) => {
       title="Property Details"
       subTitle="Please enter a detailed description about your property"
     >
-      <div className="flex flex-col w-full  ">
+      <div className="flex flex-col w-full">
         <div className="grid gap-6 mb-6 md:grid-cols-2">
           <div>
             <label
@@ -52,7 +53,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Name*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               autoFocus
               required
               type="text"
@@ -60,6 +61,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={name}
               onChange={(e) => updateFields({ name: e.target.value })}
             />
+            {errors.name && <span className="text-xs text-red-600">{errors.name}</span>}
           </div>
 
           <div>
@@ -69,11 +71,10 @@ const PropertyDetailsForm = (propertyDetails) => {
             >
               Property Type*
             </label>
-
             <select
               onChange={(e) => updateFields({ propertyType: e.target.value })}
               id="propertyType"
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               value={propertyType}
             >
               <option value="">Select an Option</option>
@@ -82,7 +83,9 @@ const PropertyDetailsForm = (propertyDetails) => {
               <option value="Condominium">Condominium</option>
               <option value="Bungalow">Bungalow</option>
             </select>
+            {errors.propertyType && <span className="text-xs text-red-600">{errors.propertyType}</span>}
           </div>
+
           <div>
             <label
               htmlFor="regularPrice"
@@ -91,7 +94,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Regular Price*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="regularPrice"
@@ -99,7 +102,9 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={regularPrice}
               onChange={(e) => updateFields({ regularPrice: e.target.value })}
             />
+            {errors.regularPrice && <span className="text-xs text-red-600">{errors.regularPrice}</span>}
           </div>
+
           <div>
             <label
               htmlFor="discountPrice"
@@ -108,7 +113,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Discount Price
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="discountPrice"
@@ -116,7 +121,9 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={discountPrice}
               onChange={(e) => updateFields({ discountPrice: e.target.value })}
             />
+            {errors.discountPrice && <span className="text-xs text-red-600">{errors.discountPrice}</span>}
           </div>
+
           <div>
             <label
               htmlFor="bathrooms"
@@ -125,7 +132,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Bathrooms*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="bathrooms"
@@ -134,7 +141,9 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={bathrooms}
               onChange={(e) => updateFields({ bathrooms: e.target.value })}
             />
+            {errors.bathrooms && <span className="text-xs text-red-600">{errors.bathrooms}</span>}
           </div>
+
           <div>
             <label
               htmlFor="bedrooms"
@@ -143,7 +152,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Bedrooms*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="bedrooms"
@@ -152,7 +161,9 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={bedrooms}
               onChange={(e) => updateFields({ bedrooms: e.target.value })}
             />
+            {errors.bedrooms && <span className="text-xs text-red-600">{errors.bedrooms}</span>}
           </div>
+
           <div>
             <label
               htmlFor="parkings"
@@ -161,7 +172,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Parkings*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="parkings"
@@ -170,6 +181,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={parkings}
               onChange={(e) => updateFields({ parkings: e.target.value })}
             />
+            {errors.parkings && <span className="text-xs text-red-600">{errors.parkings}</span>}
           </div>
 
           <div>
@@ -180,7 +192,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               Square Feet*
             </label>
             <input
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               type="number"
               id="sqFeet"
@@ -189,8 +201,10 @@ const PropertyDetailsForm = (propertyDetails) => {
               value={sqFeet}
               onChange={(e) => updateFields({ sqFeet: e.target.value })}
             />
+            {errors.sqFeet && <span className="text-xs text-red-600">{errors.sqFeet}</span>}
           </div>
         </div>
+
         <div className="grid gap-6 mb-6">
           <div>
             <label
@@ -199,7 +213,6 @@ const PropertyDetailsForm = (propertyDetails) => {
             >
               Type*
             </label>
-
             <div className="flex justify-start gap-10">
               <div className="flex gap-2">
                 <input
@@ -226,7 +239,9 @@ const PropertyDetailsForm = (propertyDetails) => {
                 <label htmlFor="Rent">Rent</label>
               </div>
             </div>
+            {errors.type && <span className="text-xs text-red-600">{errors.type}</span>}
           </div>
+
           <div>
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Amenities*
@@ -246,6 +261,7 @@ const PropertyDetailsForm = (propertyDetails) => {
               </div>
             ))}
           </div>
+
           <div>
             <label
               htmlFor="description"
@@ -254,13 +270,14 @@ const PropertyDetailsForm = (propertyDetails) => {
               Description*
             </label>
             <textarea
-              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 "
+              className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
               required
               id="description"
               value={description}
               minLength={30}
               onChange={(e) => updateFields({ description: e.target.value })}
             />
+            {errors.description && <span className="text-xs text-red-600">{errors.description}</span>}
           </div>
         </div>
       </div>
