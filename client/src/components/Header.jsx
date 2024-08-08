@@ -1,12 +1,12 @@
-import Logo from "./Logo.jsx";
+import Logo from "./Logo";
 import { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import useScroll from "../util/useScroll";
 import {
-  signOutUserStart,
-  deleteUserSuccess,
-  deleteUserFailure,
+	signOutUserStart,
+	deleteUserSuccess,
+	deleteUserFailure,
 } from "../redux/user/userSlice.js";
 import { handleApiRequest } from "../util/handleApiRequest.js";
 import { DarkmodeButton } from "./DarkmodeButton";
@@ -14,29 +14,34 @@ import { GiHamburgerMenu } from "react-icons/gi";
 import { IoClose } from "react-icons/io5";
 
 export default function Header() {
-  const [isOpen, setIsOpen] = useState(false);
-  const { currentUser } = useSelector((state) => state.user);
-  const dispatch = useDispatch();
-  const navigate = useNavigate();
-  const location = useLocation();
-  const scrolled = useScroll();
+	const [isOpen, setIsOpen] = useState(false);
+	const { currentUser } = useSelector((state) => state.user);
+	const dispatch = useDispatch();
+	const navigate = useNavigate();
+	const location = useLocation();
+	const scrolled = useScroll();
 
-  const toggleNavBar = () => {
-    setIsOpen(!isOpen);
-  };
+	const toggleNavBar = () => {
+		setIsOpen(!isOpen);
+	};
 
-  const handleSignOut = async () => {
-    await handleApiRequest(
-      dispatch,
-      navigate,
-      "/api/auth/signout",
-      "GET",
-      signOutUserStart,
-      deleteUserSuccess,
-      deleteUserFailure,
-      "/signin"
-    );
-  };
+	const handleSignOut = async () => {
+		await handleApiRequest(
+			dispatch,
+			navigate,
+			"/api/auth/signout",
+			"GET",
+			signOutUserStart,
+			deleteUserSuccess,
+			deleteUserFailure,
+			"/signin"
+		);
+	};
+
+	const getLinkClass = (path) =>
+		location.pathname === path
+			? "text-secondary" // This applies the secondary color
+			: "text-gray-900 dark:text-white";
 
 	return (
 		<header
@@ -45,7 +50,7 @@ export default function Header() {
 			} dark:bg-black shadow-md bg-clip-padding blur-background-filter`}
 		>
 			<nav className="border-gray-200">
-				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
+				<div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-2">
 					<Logo />
 					<button className="md:hidden" onClick={toggleNavBar}>
 						{isOpen ? <IoClose /> : <GiHamburgerMenu />}
@@ -59,8 +64,9 @@ export default function Header() {
 							<li>
 								<a
 									href="/"
-									className="block py-2 px-3 text-white bg-blue-700 rounded md:bg-transparent md:text-buttonSecondaryColor md:p-0 "
-									aria-current="page"
+									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+										"/"
+									)}`}
 								>
 									Home
 								</a>
@@ -68,7 +74,9 @@ export default function Header() {
 							<li>
 								<a
 									href="/About"
-									className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 md:dark:hover:text-secondary dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+										"/About"
+									)}`}
 								>
 									About
 								</a>
@@ -76,7 +84,9 @@ export default function Header() {
 							<li>
 								<a
 									href="/contact"
-									className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+										"/contact"
+									)}`}
 								>
 									Contact Us
 								</a>
@@ -86,7 +96,9 @@ export default function Header() {
 									<li>
 										<Link
 											to="/signin"
-											className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+												"/signin"
+											)}`}
 										>
 											Login
 										</Link>
@@ -97,7 +109,9 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/Profile"}
-											className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+												"/Profile"
+											)}`}
 										>
 											Profile
 										</Link>
@@ -105,7 +119,9 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/myLisitngs"}
-											className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+												"/myLisitngs"
+											)}`}
 										>
 											My Listings
 										</Link>
@@ -113,7 +129,9 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/wishlist"}
-											className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
+												"/wishlist"
+											)}`}
 										>
 											My Wishlist
 										</Link>

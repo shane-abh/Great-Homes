@@ -45,7 +45,7 @@ const Search = () => {
 				/>
 				<button
 					type="submit"
-					className="text-white absolute end-2.5 bottom-2.5 bg-blue-700 hover:bg-secondary focus:ring-4 focus:outline-none font-medium rounded-3xl text-sm px-4 py-2"
+					className="text-white absolute end-2.5 bottom-2.5 bg-primary focus:ring-4 focus:outline-none font-medium rounded-3xl text-sm px-8 py-2"
 				>
 					Search
 				</button>

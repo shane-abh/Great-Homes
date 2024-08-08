@@ -18,8 +18,6 @@ const Home = () => {
 	const [saleListings, setSaleListings] = useState([]);
 	const [rentListings, setRentListings] = useState([]);
 
-	
-
 	SwiperCore.use([Navigation]);
 
 	useEffect(() => {
@@ -68,10 +66,9 @@ const Home = () => {
 			>
 				<div className="absolute inset-0 bg-black opacity-50 rounded-sm"></div>
 				<div className="w-full px-2 flex flex-col gap-6 absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 max-w-6xl mx-auto z-10 text-gray-600 bg-black/0">
-					<h1 className="text-4xl text-white lg:text-6xl text-center font-cursiveFont">
-						Find your dream
+					<h1 className="text-4xl text-white mb-2 lg:text-6xl text-center font-comicSans">
+						Find Your Dream Here
 						<br />
-						Here
 					</h1>
 					<div className="text-xs sm:text-sm z-10 items-center justify-center outline-none">
 						<Search />

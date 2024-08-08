@@ -67,13 +67,13 @@ export default function UserListingItem(listingDetails) {
 			<div className="flex flex-col item-center">
 				<button
 					onClick={() => handleListingDelete(listing._id)}
-					className="text-white uppercase bg-red-500 rounded-md mx-4 my-2 p-2"
+					className="text-white uppercase bg-red-700 rounded-md mx-4 my-2 p-2"
 				>
 					Delete
 				</button>
 				<Link
 					to={`/update-listing/${listing._id}`}
-					className="text-white text-center  bg-green-500 rounded-md mx-4 p-2 mb-4"
+					className="text-white text-center  bg-green-700 rounded-md mx-4 p-2 mb-4"
 				>
 					<button className=" uppercase">Edit</button>
 				</Link>
