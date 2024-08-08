@@ -178,6 +178,8 @@ const MortgageCalculator = ( calculatorData ) => {
                     id="extraPayment"
                     name="extraPayment"
                     placeholder="$2,000"
+                    min={0}
+
                     value={formData.extraPayment}
                     onChange={handleChange}
                   />
@@ -192,6 +194,7 @@ const MortgageCalculator = ( calculatorData ) => {
                     id="extraPaymentIntervalYears"
                     name="extraPaymentIntervalYears"
                     placeholder="2"
+                    min={0}
                     value={formData.extraPaymentIntervalYears}
                     onChange={handleChange}
                   />

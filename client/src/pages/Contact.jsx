@@ -1,6 +1,7 @@
 import  { useState } from 'react';
 import HeroImage from '../assets/hero.jpg';
 
+
 export default function Contact() {
   const [formData, setFormData] = useState({
     Name: '',
@@ -10,7 +11,7 @@ export default function Contact() {
   });
   const [msg, setMsg] = useState('');
 
-  const scriptURL = 'https://script.google.com/macros/s/AKfycbwlcPLDuwLuW8tOiDhWo20vrEt7ZVFQrBN3ptLUms0Ln9JIVwO2FAf3xVph12Uft0h-Hg/exec';
+  const scriptURL = import.meta.env.GOOGLE_SHEETS_SCRIPTS_URL;
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -28,6 +29,7 @@ export default function Contact() {
     fetch(scriptURL, { method: 'POST', body: form })
       .then( response => {
         setMsg('Message Sent Successfully. We will get back to you shortly.');
+        alert('Message Sent Successfully. We will get back to you shortly.')
         setTimeout(() => setMsg(''), 5000);
         setFormData({ Name: '', Email: '', Phone: '', Message: '' });
       })

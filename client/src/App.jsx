@@ -14,6 +14,7 @@ import { UpdateLisitng } from "./pages/UpdateLisitng";
 import Wishlist from "./pages/Wishlist";
 import { CreateLisitng } from "./pages/CreateLisitng";
 import Contact from "./pages/Contact";
+import cors from 'cors';
 
 export default function App() {
 	return (
