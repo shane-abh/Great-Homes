@@ -16,6 +16,7 @@ export default {
       },
       fontFamily: {
         cursiveFont: ["Leckerli One", 'cursive'],
+        comicSans: ["Comic Neue", "cursive"]
       },
       backgroundImage: {
         'profile-pattern': "url('../profile-bg.jpg')",
