@@ -1,10 +1,10 @@
-import sitelogoTwo from "../assets/g.png";
+import sitelogoTwo from "../assets/header_logo.svg";
 
 const Logo = () => {
 	return (
 		<div>
 			<a href="/" target="self">
-				<img className="w-28" src={sitelogoTwo} alt="Great Homes" />
+				<img className="w-24" src={sitelogoTwo} alt="Great Homes" />
 			</a>
 		</div>
 	);
