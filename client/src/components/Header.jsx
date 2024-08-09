@@ -46,7 +46,7 @@ export default function Header() {
 	return (
 		<header
 			className={`sticky top-0 z-[20] transition-colors duration-300 ${
-				scrolled ? "bg-gray-400" : "bg-white"
+				scrolled ? "bg-primary" : "bg-white"
 			} dark:bg-black shadow-md bg-clip-padding blur-background-filter`}
 		>
 			<nav className="border-gray-200">
@@ -64,9 +64,11 @@ export default function Header() {
 							<li>
 								<a
 									href="/"
-									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-										"/"
-									)}`}
+									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+										scrolled
+											? "text-secondary"
+											: "text-black"
+									} ${getLinkClass("/")}`}
 								>
 									Home
 								</a>
@@ -74,9 +76,11 @@ export default function Header() {
 							<li>
 								<a
 									href="/About"
-									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-										"/About"
-									)}`}
+									className={`block py-2 px-3 rounded  md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+										scrolled
+											? "text-secondary"
+											: "text-black"
+									} ${getLinkClass("/About")}`}
 								>
 									About
 								</a>
@@ -84,9 +88,11 @@ export default function Header() {
 							<li>
 								<a
 									href="/contact"
-									className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-										"/contact"
-									)}`}
+									className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+										scrolled
+											? "text-secondary"
+											: "text-black"
+									} ${getLinkClass("/contact")}`}
 								>
 									Contact Us
 								</a>
@@ -96,9 +102,11 @@ export default function Header() {
 									<li>
 										<Link
 											to="/signin"
-											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-												"/signin"
-											)}`}
+											className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+												scrolled
+													? "text-secondary"
+													: "text-black"
+											} ${getLinkClass("/signin")}`}
 										>
 											Login
 										</Link>
@@ -109,9 +117,11 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/Profile"}
-											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-												"/Profile"
-											)}`}
+											className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+												scrolled
+													? "text-secondary"
+													: "text-black"
+											} ${getLinkClass("/Profile")}`}
 										>
 											Profile
 										</Link>
@@ -119,9 +129,11 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/myLisitngs"}
-											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-												"/myLisitngs"
-											)}`}
+											className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+												scrolled
+													? "text-secondary"
+													: "text-black"
+											} ${getLinkClass("/myLisitngs")}`}
 										>
 											My Listings
 										</Link>
@@ -129,9 +141,11 @@ export default function Header() {
 									<li>
 										<Link
 											to={"/wishlist"}
-											className={`block py-2 px-3 rounded hover:bg-gray-100 md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${getLinkClass(
-												"/wishlist"
-											)}`}
+											className={`block py-2 px-3 rounded md:hover:bg-transparent md:p-0 dark:hover:bg-gray-700 ${
+												scrolled
+													? "text-secondary"
+													: "text-black"
+											} ${getLinkClass("/wishlist")}`}
 										>
 											My Wishlist
 										</Link>
@@ -140,12 +154,16 @@ export default function Header() {
 									<li>
 										<button
 											onClick={handleSignOut}
-											className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700"
+											className={`block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700 ${
+												scrolled
+													? "text-secondary"
+													: "text-black"
+											}`}
 										>
 											Sign Out
 										</button>
 									</li>
-									<li className="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
+									<li className="block py-2 px-3 text-gray-900 rounded md:hover:bg-transparent md:hover:text-secondary md:p-0 dark:text-white md:dark:hover:text-secondary dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">
 										<DarkmodeButton />
 									</li>
 								</>
