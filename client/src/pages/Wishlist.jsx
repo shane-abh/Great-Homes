@@ -21,14 +21,14 @@ const Wishlist = () => {
 	}, [currentUser._id]);
 
 	return (
-		<div className="max-w-screen-xl mx-auto">
+		<div className="max-w-screen-xl mx-auto my-10">
 			<div className="flex justify-between p-4">
 				<h1 className="text-center text-3xl font-bold my-2">
 					Wishlist
 				</h1>
 			</div>
 
-			<div className="flex  justify-start">
+			<div className="flex justify-start">
 				<div className="flex flex-wrap gap-4 ">
 					{wishlist.map((listing) => (
 						<WishlistItem

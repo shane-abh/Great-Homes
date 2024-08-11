@@ -7,20 +7,19 @@ import Profile from "./pages/Profile";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrivateRoute from "./components/PrivateRoute";
-import { Listing } from "./pages/Lisitng";
 import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
-import { UpdateLisitng } from "./pages/UpdateLisitng";
 import Wishlist from "./pages/Wishlist";
+import { Listing } from "./pages/Lisitng";
+import { UpdateLisitng } from "./pages/UpdateLisitng";
 import { CreateLisitng } from "./pages/CreateLisitng";
 import Contact from "./pages/Contact";
-import cors from 'cors';
 
 export default function App() {
 	return (
 		<BrowserRouter>
 			<Header />
-			<div className="main-content">
+			<div className="main-content dark:bg-black">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/SignIn" element={<SignIn />}></Route>

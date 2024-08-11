@@ -30,7 +30,10 @@ export default function WishlistItem(wishlistDetails) {
 	};
 
 	return (
-		<div className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg m-2 md:w-1/4 ">
+		<div
+			className="bg-white shadow-md hover:shadow-lg transition-shadow overflow-hidden rounded-lg 
+		m-2"
+		>
 			<Link to={`/listing/${listing._id}`}>
 				<img
 					src={listing.imageUrls[0] || USERLISTING_IMG}

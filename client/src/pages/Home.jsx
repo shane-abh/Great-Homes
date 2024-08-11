@@ -67,14 +67,13 @@ const Home = () => {
 				<div className="absolute inset-0 bg-primary/20 rounded-sm"></div>
 				<div className="w-full px-2 flex flex-col gap-6 absolute top-1/4 left-1/2 transform -translate-x-1/2 -translate-y-1/4 max-w-6xl mx-auto z-10 text-gray-600 bg-black/0">
 					<h1 className="text-4xl text-white mb-2 lg:text-6xl text-center font-serif">
-						Find Your Dream 
+						Find Your Dream
 						<br />
 						Home Here
 					</h1>
 					<div className="text-xs sm:text-sm z-10 items-center justify-center outline-none">
 						<Search />
 					</div>
-					
 				</div>
 			</div>
 
@@ -105,11 +104,11 @@ const Home = () => {
 				{rentListings && rentListings.length > 0 && (
 					<div className="">
 						<div className="my-3">
-							<h2 className="text-2xl font-semibold text-slate-600">
+							<h2 className="text-2xl font-semibold text-slate-600 dark:text-white">
 								Recent places for rent
 							</h2>
 							<Link
-								className="text-sm text-blue-800 hover:underline"
+								className="text-sm text-blue-800 hover:underline dark:text-secondary"
 								to={"/search?type=Rent"}
 							>
 								Show more places for rent
@@ -128,11 +127,11 @@ const Home = () => {
 				{saleListings && saleListings.length > 0 && (
 					<div className="">
 						<div className="my-3">
-							<h2 className="text-2xl font-semibold text-slate-600">
+							<h2 className="text-2xl font-semibold text-slate-600 dark:text-white">
 								Recent places for sale
 							</h2>
 							<Link
-								className="text-sm text-blue-800 hover:underline"
+								className="text-sm text-blue-800 hover:underline dark:text-secondary"
 								to={"/search?type=Sale"}
 							>
 								Show more places for sale
