@@ -75,10 +75,21 @@ const listingSchema = new mongoose.Schema(
       type: Array,
       required: true,
     },
+<<<<<<< HEAD
+=======
+    contactEmail: {
+      type: String,
+      required: true,
+    },
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     userRef: {
       type: String,
       required: true,
     },
+<<<<<<< HEAD
+=======
+   
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   },
   { timestamps: true }
 );

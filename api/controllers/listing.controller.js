@@ -1,6 +1,7 @@
 import Listing from "../models/lisitng.model.js";
 import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
+<<<<<<< HEAD
 
 export const createListing = async (req, res, next) => {
   // const errors = validationResult(req);
@@ -8,6 +9,12 @@ export const createListing = async (req, res, next) => {
   //   return res.status(400).json({ errors: errors.array() });
   // }
 
+=======
+import nodemailer from "nodemailer";
+
+
+export const createListing = async (req, res, next) => {
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   try {
     const listing = await Listing.create(req.body);
     return res.status(201).json(listing);
@@ -16,7 +23,10 @@ export const createListing = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 export const deleteListing = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
 
@@ -76,13 +86,21 @@ export const getListing = async (req, res, next) => {
 export const getListings = async (req, res, next) => {
   try {
     console.log(req.query);
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     const searchTerm = req.query.searchTerm || "";
     const sort = req.query.sort || "createdAt";
     const order = req.query.order === "asc" ? 1 : -1;
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     const parseBooleanFilter = (filter) => {
       if (filter === undefined || filter === "false") {
         return { $in: [false, true] };
@@ -126,7 +144,11 @@ export const getListings = async (req, res, next) => {
       "amenities.parking": parking,
       "amenities.laundry": laundry,
       "amenities.kitchenEssentials": kitchenEssentials,
+<<<<<<< HEAD
       regularPrice: { $gte: minPrice, $lte: maxPrice }
+=======
+      regularPrice: { $gte: minPrice, $lte: maxPrice },
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     };
 
     if (homeStyleFilters.length > 0) {
@@ -148,8 +170,11 @@ export const getListings = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
 
 
+=======
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 export const getAll = async (req, res, next) => {
   const listings = await Listing.find();
   return res.status(200).json(listings);
@@ -159,7 +184,11 @@ export const getMortgageCalculations = async (req, res, next) => {
   const {
     purchasePrice,
     downPayment,
+<<<<<<< HEAD
     
+=======
+
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     annualInterestRate,
     loanTermYears,
     extraPayment,
@@ -211,7 +240,11 @@ export const getMortgageCalculations = async (req, res, next) => {
       interestSaved,
       timeSavedMonths,
       cmhcPremium,
+<<<<<<< HEAD
       principal
+=======
+      principal,
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     });
   }
 
@@ -219,7 +252,11 @@ export const getMortgageCalculations = async (req, res, next) => {
 };
 
 const getCMHCRate = (LTV) => {
+<<<<<<< HEAD
   if (LTV > 0 && LTV <= 65) return 0.006;
+=======
+  if (LTV >= 0 && LTV <= 65) return 0.006;
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   else if (LTV > 65 && LTV <= 75) return 0.015;
   else if (LTV > 75 && LTV <= 80) return 0.024;
   else if (LTV > 80 && LTV <= 85) return 0.028;
@@ -227,3 +264,113 @@ const getCMHCRate = (LTV) => {
   else if (LTV > 90 && LTV <= 95) return 0.04;
   else return 0;
 };
+<<<<<<< HEAD
+=======
+
+export const contactLandlord = async (req, res, next) => {
+  const { message, email } = req.body;
+
+  
+  // Create a transporter object using SMTP transport
+  let transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: {
+      user: "realestatecapstone06@gmail.com",
+      pass: process.env.APP_PASS, // Use App Passwords for security
+    },
+  });
+
+  // Set up email data
+  let mailOptions = {
+    from: "realestatecapstone06@gmail.com", // sender address
+    to: "shaneabh777@gmail.com", // list of receivers
+    subject: "Contact from Website", // Subject line
+    text: message, // plain text body
+    html: `
+        <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <meta charset="UTF-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      <title>Welcome to Real Estate</title>
+      <style>
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 0;
+          background-color: #f6f6f6;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .container {
+          background-color: white;
+          padding: 20px;
+          border-radius: 10px;
+          box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+          text-align: center;
+          max-width: 600px;
+          width: 100%;
+        }
+        .image {
+          width: 100%;
+          border-radius: 10px;
+        }
+        .title {
+          font-size: 24px;
+          color: #333;
+          margin: 20px 0;
+        }
+        .description {
+          font-size: 16px;
+          color: #666;
+          margin: 20px 0;
+        }
+        .button {
+          display: inline-block;
+          padding: 10px 20px;
+          background-color: #ff5722;
+          color: white;
+          text-decoration: none;
+          border-radius: 5px;
+          font-weight: bold;
+        }
+        .button:hover {
+          background-color: #e64a19;
+        }
+      </style>
+    </head>
+    <body>
+    <p>Hi,</p>
+      <div class="container">
+        
+        <h1 class="title">You have an enquiry from Great Homes</h1>
+        <p class="description">
+          Hi, You have a message from ${email}.
+          <br />
+          ${message}
+        </p>
+        <br/>
+        <p>Best regards,<br />
+        Great Homes</p>
+
+      </div>
+    </body>
+    </html>
+      
+    `, // html body
+  };
+
+  try {
+    // Send mail with defined transport object
+    let info = await transporter.sendMail(mailOptions);
+
+    console.log("Message sent: %s", info.messageId);
+    res.status(200).json({ success: true, message: "Email sent successfully" });
+  } catch (error) {
+    console.error("Error sending email:", error);
+    res.status(500).json({ success: false, message: "Internal Server Error" });
+  }
+};
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a

@@ -12,6 +12,12 @@
   "dependencies": {
     "@canvasjs/react-charts": "^1.0.2",
     "@reduxjs/toolkit": "^2.2.5",
+<<<<<<< HEAD
+=======
+    "@tailwindcss/forms": "^0.5.7",
+    "canvasjs-react-charts": "^1.0.5",
+    "cors": "^2.8.5",
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     "crypto-js": "^4.2.0",
     "dompurify": "^3.1.6",
     "firebase": "^10.12.2",

@@ -4,8 +4,16 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
+<<<<<<< HEAD
 import cookieParser from 'cookie-parser';
 import path from 'path';
+=======
+import wishlistRouter from './routes/wishlist.route.js'
+import contactLandlordRouter from './routes/contactLandlord.route.js';
+import cookieParser from 'cookie-parser';
+import path from 'path';
+
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 dotenv.config();
 
 mongoose
@@ -33,6 +41,11 @@ app.listen(3000, () => {
 app.use('/api/user', userRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/listing', listingRouter);
+<<<<<<< HEAD
+=======
+app.use('/api/wishlist', wishlistRouter)
+app.use('/api/contactLandlord', contactLandlordRouter)
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 
 
 app.use(express.static(path.join(__dirname, '/client/dist')));

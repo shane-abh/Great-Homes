@@ -67,10 +67,20 @@ export const calculateAmortization = (
 
     monthsToPayoff = i;
   }
+<<<<<<< HEAD
 
   return {
     monthlyPayment: monthlyPayment.toFixed(5),
     totalInterestPaid: totalInterestPaid.toFixed(5),
+=======
+  console.log(principal,
+    annualInterestRate,
+    loanTermYears)
+
+  return {
+    monthlyPayment: monthlyPayment.toFixed(2),
+    totalInterestPaid: totalInterestPaid.toFixed(2),
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     monthsToPayoff: monthsToPayoff,
     amortizationSchedule: schedule,
     
