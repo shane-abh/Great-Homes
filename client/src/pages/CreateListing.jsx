@@ -28,37 +28,6 @@ export default function CreateListing() {
     furnished: false,
   });
 
-  // const [formData2, setFormData2] = useState({
-  //   name: "Kelcy Fanq",
-  //   description:
-  //     "Great Homes - Discover serenity and comfort in this end unit townhouse nestled in a tranquil Village on the Green. Recently renovated in 2021, this 3 bed, 4 bath townhouse revels in countless upgrades enhancing every corner. Welcome guests through a stylish front door replaced in 2023. Step onto newly laid floors throughout the main and upper levels, and indulge in refreshed bathrooms featuring updated tubs, showers, toilets, plumbing, and vanities, all from 2021. The heart of the home, the kitchen, shines with new appliances and contemporary finishes, also completed in 2021. Cozy up by the wood-burning fireplace in the living room. Outdoors, unwind in the private backyard oasis, offering unmatched seclusion without facing other units. Ask your agent for the full list of upgrades which total over $100K. Don't miss the opportunity to make this meticulously upgraded haven your own. (id:4236)\n\n",
-  //   address: {
-  //     street: "122 University Avenue East",
-  //     city: "Waterloo",
-  //     province: "Ontario",
-  //     postalCode: "N2J 4J1", // Sample postal code
-  //   },
-  //   propertyType: "House", // Assuming 'Townhouse' is in propertyTypes
-  //   regularPrice: 624500,
-  //   discountPrice: 0,
-  //   bathrooms: 4,
-  //   bedrooms: 3,
-  //   parkings: 1, // Assuming there is 1 parking spot
-  //   amenities: {
-  //     furnished: false,
-  //     parking: true,
-  //     laundry: true, // Assuming there is laundry
-  //     kitchenEssentials: true, // Assuming there are kitchen essentials
-  //   },
-  //   sqFeet: 2000, // Assuming a sample square footage
-  //   type: "sale",
-  //   offer: false,
-  //   imageUrls: [
-  //     "https://firebasestorage.googleapis.com/v0/b/realestate-99178.appspot.com/o/1718715605118Prperty1.jpg?alt=media&token=3625ebff-c774-482d-afd1-b4add8c4172c",
-  //     "https://firebasestorage.googleapis.com/v0/b/realestate-99178.appspot.com/o/1718715628508P1dining.webp?alt=media&token=f7a63053-6a25-4748-a9cf-b2d62e18284c",
-  //   ],
-  //   userRef: "6671833b6971b2bcff7abb26",
-  // });
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);

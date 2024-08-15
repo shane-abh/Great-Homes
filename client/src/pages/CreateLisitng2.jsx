@@ -8,36 +8,9 @@ import { useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import DOMPurify from "dompurify";
 
-// type FormData = {
-//   name: string,
-//   description: string,
-//   address: {
-//     street: string,
-//     city: string,
-//     province: string,
-//     postalCode: string,
-//   },
-//   propertyType: string,
-//   regularPrice: number,
-//   discountPrice: number,
-//   bathrooms: number,
-//   bedrooms: number,
-//   parkings: number,
-//   amenities: {
-//     furnished: boolean,
-//     parking: boolean,
-//     laundry: boolean,
-//     kitchenEssentials: boolean,
-//   },
-//   sqFeet: number, // Assuming a sample square footage
-//   type: string,
-//   offer: boolean,
-//   imageUrls: [string],
-//   userRef: string,
-// };
 
 const INITIAL_DATA = {
-  name: "", // name of house/villa/apartment
+  name: "", 
   description: "",
   address: {
     street: "",
@@ -45,7 +18,7 @@ const INITIAL_DATA = {
     province: "",
     postalCode: "",
   },
-  propertyType: "", // villa/bungalow/apartment/condominium
+  propertyType: "", 
   regularPrice: 0,
   discountPrice: 0,
   bathrooms: 0,
@@ -57,7 +30,7 @@ const INITIAL_DATA = {
     laundry: false,
     kitchenEssentials: false,
   },
-  sqFeet: 0, // Assuming a sample square footage
+  sqFeet: 0, 
   type: "",
   offer: false,
   imageUrls: [],
