@@ -3,7 +3,6 @@ import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
 import nodemailer from "nodemailer";
 
-
 export const createListing = async (req, res, next) => {
   try {
     const listing = await Listing.create(req.body);
@@ -98,7 +97,6 @@ export const getListings = async (req, res, next) => {
 
     const minPrice = parseFloat(req.query.minPrice) || 0;
     const maxPrice = parseFloat(req.query.maxPrice) || Infinity;
-
     const homeStyles = ["Apartment", "Bungalow", "Condominium", "Villa"];
     const homeStyleFilters = homeStyles.reduce((acc, style) => {
       if (req.query[style] === "true") {

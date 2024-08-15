@@ -10,10 +10,10 @@ import PrivateRoute from "./components/PrivateRoute";
 import Search from "./pages/Search";
 import UserLisitings from "./pages/UserLisitings";
 import Wishlist from "./pages/Wishlist";
+import Contact from "./pages/Contact";
 import { Listing } from "./pages/Lisitng";
 import { UpdateLisitng } from "./pages/UpdateLisitng";
 import { CreateLisitng } from "./pages/CreateLisitng";
-import Contact from "./pages/Contact";
 
 export default function App() {
 	return (

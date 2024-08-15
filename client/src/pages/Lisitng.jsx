@@ -14,7 +14,6 @@ import {
   FaShare,
 } from "react-icons/fa";
 import { FcSalesPerformance } from "react-icons/fc";
-
 import MortgageCalculator from "../components/MortgageCalculator";
 import { Tab, Tabs, TabList, TabPanel } from "react-tabs";
 import "react-tabs/style/react-tabs.css";

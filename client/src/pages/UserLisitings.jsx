@@ -1,12 +1,10 @@
 import { useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
-
 import UserListingItem from "../components/UserListingItem";
 
 const UserLisitings = () => {
 	const { currentUser } = useSelector((state) => state.user);
-
 	const [userListings, setUserListings] = useState([]);
 
 	const navigate = useNavigate();
