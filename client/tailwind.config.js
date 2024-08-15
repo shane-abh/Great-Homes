@@ -4,10 +4,7 @@ export default {
     "./index.html",
     "./src/**/*.{js,ts,jsx,tsx}",
   ],
-<<<<<<< HEAD
-=======
   darkMode: "class",
->>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   theme: {
     extend: {
       colors: {
@@ -19,12 +16,6 @@ export default {
       },
       fontFamily: {
         cursiveFont: ["Leckerli One", 'cursive'],
-<<<<<<< HEAD
-      },
-    },
-  },
-  plugins: [],
-=======
         comicSans: ["Comic Neue", "cursive"]
       },
       backgroundImage: {
@@ -36,5 +27,4 @@ export default {
     // eslint-disable-next-line no-undef
     require('@tailwindcss/forms'),
   ],
->>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 }
