@@ -1,10 +1,20 @@
 import Listing from "../models/lisitng.model.js";
 import { errorHandler } from "../utils/error.js";
 import { calculateAmortization } from "../utils/calculateAmortization.js";
+<<<<<<< HEAD
+
+export const createListing = async (req, res, next) => {
+  // const errors = validationResult(req);
+  // if (!errors.isEmpty()) {
+  //   return res.status(400).json({ errors: errors.array() });
+  // }
+
+=======
 import nodemailer from "nodemailer";
 
 
 export const createListing = async (req, res, next) => {
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   try {
     const listing = await Listing.create(req.body);
     return res.status(201).json(listing);
@@ -13,6 +23,10 @@ export const createListing = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
+
+=======
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 export const deleteListing = async (req, res, next) => {
   const listing = await Listing.findById(req.params.id);
 
@@ -72,13 +86,21 @@ export const getListing = async (req, res, next) => {
 export const getListings = async (req, res, next) => {
   try {
     console.log(req.query);
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     const searchTerm = req.query.searchTerm || "";
     const sort = req.query.sort || "createdAt";
     const order = req.query.order === "asc" ? 1 : -1;
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     const parseBooleanFilter = (filter) => {
       if (filter === undefined || filter === "false") {
         return { $in: [false, true] };
@@ -122,7 +144,11 @@ export const getListings = async (req, res, next) => {
       "amenities.parking": parking,
       "amenities.laundry": laundry,
       "amenities.kitchenEssentials": kitchenEssentials,
+<<<<<<< HEAD
+      regularPrice: { $gte: minPrice, $lte: maxPrice }
+=======
       regularPrice: { $gte: minPrice, $lte: maxPrice },
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     };
 
     if (homeStyleFilters.length > 0) {
@@ -144,6 +170,11 @@ export const getListings = async (req, res, next) => {
   }
 };
 
+<<<<<<< HEAD
+
+
+=======
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 export const getAll = async (req, res, next) => {
   const listings = await Listing.find();
   return res.status(200).json(listings);
@@ -153,7 +184,11 @@ export const getMortgageCalculations = async (req, res, next) => {
   const {
     purchasePrice,
     downPayment,
+<<<<<<< HEAD
+    
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     annualInterestRate,
     loanTermYears,
     extraPayment,
@@ -205,7 +240,11 @@ export const getMortgageCalculations = async (req, res, next) => {
       interestSaved,
       timeSavedMonths,
       cmhcPremium,
+<<<<<<< HEAD
+      principal
+=======
       principal,
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     });
   }
 
@@ -213,7 +252,11 @@ export const getMortgageCalculations = async (req, res, next) => {
 };
 
 const getCMHCRate = (LTV) => {
+<<<<<<< HEAD
+  if (LTV > 0 && LTV <= 65) return 0.006;
+=======
   if (LTV >= 0 && LTV <= 65) return 0.006;
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
   else if (LTV > 65 && LTV <= 75) return 0.015;
   else if (LTV > 75 && LTV <= 80) return 0.024;
   else if (LTV > 80 && LTV <= 85) return 0.028;
@@ -221,6 +264,8 @@ const getCMHCRate = (LTV) => {
   else if (LTV > 90 && LTV <= 95) return 0.04;
   else return 0;
 };
+<<<<<<< HEAD
+=======
 
 export const contactLandlord = async (req, res, next) => {
   const { message, email } = req.body;
@@ -328,3 +373,4 @@ export const contactLandlord = async (req, res, next) => {
     res.status(500).json({ success: false, message: "Internal Server Error" });
   }
 };
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a

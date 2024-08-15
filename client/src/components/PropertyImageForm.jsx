@@ -1,6 +1,12 @@
+<<<<<<< HEAD
+import React, { useEffect, useState } from "react";
+import { FormWrapper } from "./FormWrapper";
+import { useSelector } from "react-redux";
+=======
 import { useState } from "react";
 import { FormWrapper } from "./FormWrapper";
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 import {
   getDownloadURL,
   getStorage,
@@ -8,13 +14,29 @@ import {
   uploadBytesResumable,
 } from "firebase/storage";
 import { app } from "../firebase";
+<<<<<<< HEAD
+import { useNavigate } from "react-router-dom";
+
+const PropertyImageForm = ({ imageUrls, updateFields, ...data }) => {
+ 
+=======
 
 const PropertyImageForm = (prevData) => {
   const { imageUrls, updateFields, ...data } = prevData;
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 
   const [imageUploadError, setImageUploadError] = useState(false);
   const [uploading, setUploading] = useState(false);
   const [error, setError] = useState(false);
+<<<<<<< HEAD
+  const [loading, setLoading] = useState(false);
+  const [files, setFiles] = useState([]);
+
+console.log(imageUrls)
+ 
+
+  const handleImageSubmit = (e) => {
+=======
 
   const [files, setFiles] = useState([]);
 
@@ -22,6 +44,7 @@ const PropertyImageForm = (prevData) => {
 
   const handleImageSubmit = (e) => {
     e.preventDefault();
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     if (files.length > 0 && files.length + imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -37,10 +60,16 @@ const PropertyImageForm = (prevData) => {
           setUploading(false);
         })
         .catch((err) => {
+<<<<<<< HEAD
+          console.log(err)
+          setImageUploadError("Image upload failed (2 mb max per image)");
+          setUploading(false);
+=======
           console.log(err);
           setImageUploadError("Image upload failed (2 mb max per image)");
           setUploading(false);
           setError(err)
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
         });
     } else {
       setImageUploadError("You can only upload 6 images per listing");
@@ -84,10 +113,14 @@ const PropertyImageForm = (prevData) => {
     });
   };
   return (
+<<<<<<< HEAD
+    <FormWrapper title="Property Images" subTitle="Please add images of the property for better clarity">
+=======
     <FormWrapper
       title="Property Images"
       subTitle="Please add images of the property for better clarity"
     >
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
       <div className="flex flex-col flex-1 gap-4">
         <p className="font-semibold">
           Images:
@@ -137,7 +170,11 @@ const PropertyImageForm = (prevData) => {
               </button>
             </div>
           ))}
+<<<<<<< HEAD
+        
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
         {error && <p className="text-red-700 text-sm">{error}</p>}
       </div>
     </FormWrapper>

@@ -1,3 +1,29 @@
+<<<<<<< HEAD
+import React from "react";
+import { FormWrapper } from "./FormWrapper";
+
+const PropertyReview = ({
+  name,
+  description,
+  address,
+  propertyType,
+  regularPrice,
+  discountPrice,
+  bathrooms,
+  bedrooms,
+  parkings,
+  amenities,
+  sqFeet, // Assuming a sample square footage
+  type,
+  offer,
+  imageUrls,
+  userRef,
+}) => {
+  const { street, city, province, postalCode } = address;
+  const { furnished, parking, laundry, kitchenEssentials } = amenities;
+  return (
+    <FormWrapper title="Review" subTitle="Please carefully review the property details">
+=======
 import { FormWrapper } from "./FormWrapper";
 
 const PropertyReview = (propertyDetails) => {
@@ -23,6 +49,7 @@ const PropertyReview = (propertyDetails) => {
       title="Review"
       subTitle="Please carefully review the property details"
     >
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
       <div>
         <h2 className="text-2xl font-bold mt-4 mb-2">Property Details</h2>
         <div className="grid gap-6 grid-cols-1  md:grid-cols-2">
@@ -30,7 +57,11 @@ const PropertyReview = (propertyDetails) => {
             <h3 className="font-semibold text-black/70">Name</h3>
             <p>{name}</p>
           </div>
+<<<<<<< HEAD
+          
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
           <div>
             <h3 className="font-semibold text-black/70">Property Type</h3>
             <p>{propertyType}</p>
@@ -40,7 +71,11 @@ const PropertyReview = (propertyDetails) => {
             <p>Regular Price: ${regularPrice}</p>
             <p>Discount Price: ${discountPrice}</p>
           </div>
+<<<<<<< HEAD
+          
+=======
 
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
           <div>
             <h3 className="font-semibold text-black/70">Bathrooms</h3>
             <p> {bathrooms}</p>
@@ -68,6 +103,10 @@ const PropertyReview = (propertyDetails) => {
             <h3 className="font-semibold text-black/70">Description</h3>
             <p>{description}</p>
           </div>
+<<<<<<< HEAD
+          
+=======
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
         </div>
         <h2 className="text-2xl font-bold mt-4 mb-2">Address</h2>
         <div className="flex flex-col gap-2 mb-8">

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+export default function About() {
+	return <div>About</div>;
+=======
 import HeroImage from "../assets/hero.jpg";
 
 export default function About() {
@@ -82,4 +86,5 @@ export default function About() {
 			</div>
 		</div>
 	);
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 }

@@ -1,3 +1,7 @@
+<<<<<<< HEAD
+export default function Listing() {
+	return <div>Contact Landlord</div>;
+=======
 import { useState } from "react";
 import HeroImage from "../assets/hero.jpg";
 import { toast, ToastContainer } from "react-toastify";
@@ -171,4 +175,5 @@ export default function Contact() {
 			</div>
 		</div>
 	);
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 }

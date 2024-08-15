@@ -1,3 +1,12 @@
+<<<<<<< HEAD
+import React from "react";
+
+export function FormWrapper({ title, subTitle, children }) {
+  const circleDimension = "10vw";
+
+  // Function to generate a step item
+  const StepItem = ({ stepNumber, stepTitle }) => (
+=======
 
 
 export function FormWrapper(formElements) {
@@ -8,6 +17,7 @@ export function FormWrapper(formElements) {
   const StepItem = (stepPosition) => {
     const { stepNumber, stepTitle } = stepPosition
     return (
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
     <div className="w-1/4">
       <div
         className={`w-[${circleDimension}] h-[${circleDimension}] rounded-full flex justify-center items-center ${
@@ -21,7 +31,10 @@ export function FormWrapper(formElements) {
       </div>
     </div>
   );
+<<<<<<< HEAD
+=======
 }
+>>>>>>> cf0b6974242fddcb6d4d2994ac061ada0203344a
 
   return (
     <>
