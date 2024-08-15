@@ -20,7 +20,6 @@ export default function Profile() {
 	const [formData, setFormData] = useState({});
 	const [updateSuccess, setUpdateSuccess] = useState(false);
 	const { currentUser, loading, error } = useSelector((state) => state.user);
-
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 

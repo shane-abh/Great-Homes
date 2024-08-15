@@ -4,10 +4,10 @@ import dotenv from 'dotenv';
 import userRouter from './routes/user.route.js';
 import authRouter from './routes/auth.route.js';
 import listingRouter from './routes/listing.route.js';
-import wishlistRouter from './routes/wishlist.route.js'
-import contactLandlordRouter from './routes/contactLandlord.route.js';
 import cookieParser from 'cookie-parser';
 import path from 'path';
+import wishlistRouter from './routes/wishlist.route.js'
+import contactLandlordRouter from './routes/contactLandlord.route.js';
 
 dotenv.config();
 
@@ -20,7 +20,7 @@ mongoose
     console.log(err);
   });
 
-  const __dirname = path.resolve();
+const __dirname = path.resolve();
 
 const app = express();
 

@@ -76,6 +76,6 @@ export const calculateAmortization = (
     totalInterestPaid: totalInterestPaid.toFixed(2),
     monthsToPayoff: monthsToPayoff,
     amortizationSchedule: schedule,
-    
+
   };
 };

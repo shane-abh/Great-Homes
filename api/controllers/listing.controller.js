@@ -72,13 +72,11 @@ export const getListing = async (req, res, next) => {
 export const getListings = async (req, res, next) => {
   try {
     console.log(req.query);
-
     const limit = parseInt(req.query.limit) || 9;
     const startIndex = parseInt(req.query.startIndex) || 0;
     const searchTerm = req.query.searchTerm || "";
     const sort = req.query.sort || "createdAt";
     const order = req.query.order === "asc" ? 1 : -1;
-
     const parseBooleanFilter = (filter) => {
       if (filter === undefined || filter === "false") {
         return { $in: [false, true] };
@@ -153,7 +151,6 @@ export const getMortgageCalculations = async (req, res, next) => {
   const {
     purchasePrice,
     downPayment,
-
     annualInterestRate,
     loanTermYears,
     extraPayment,
@@ -224,8 +221,8 @@ const getCMHCRate = (LTV) => {
 
 export const contactLandlord = async (req, res, next) => {
   const { message, email } = req.body;
-  console.log(req.body)
-  
+
+
   // Create a transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
     service: "gmail",
