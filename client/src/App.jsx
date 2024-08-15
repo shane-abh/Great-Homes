@@ -19,7 +19,7 @@ export default function App() {
 	return (
 		<BrowserRouter>
 			<Header />
-			<div className="main-content dark:bg-black">
+			<div className="main-content dark:bg-dark-mode">
 				<Routes>
 					<Route path="/" element={<Home />}></Route>
 					<Route path="/SignIn" element={<SignIn />}></Route>

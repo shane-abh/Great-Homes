@@ -224,7 +224,7 @@ const getCMHCRate = (LTV) => {
 
 export const contactLandlord = async (req, res, next) => {
   const { message, email } = req.body;
-
+  console.log(req.body)
   
   // Create a transporter object using SMTP transport
   let transporter = nodemailer.createTransport({
@@ -307,10 +307,11 @@ export const contactLandlord = async (req, res, next) => {
           ${message}
         </p>
         <br/>
-        <p>Best regards,<br />
-        Great Homes</p>
+        
 
       </div>
+      <p>Best regards,<br />
+        Great Homes</p>
     </body>
     </html>
       

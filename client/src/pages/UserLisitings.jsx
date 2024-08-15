@@ -35,12 +35,12 @@ const UserLisitings = () => {
 		<>
 			<div className="max-w-screen-xl mx-auto my-10">
 				<div className="flex justify-between p-4   ">
-					<h1 className="text-center text-3xl font-bold my-2">
+					<h1 className="text-center text-3xl font-bold my-2 dark:text-white">
 						My Listings
 					</h1>
 
 					<Link
-						className="bg-primary text-white p-4 rounded-lg"
+						className="bg-primary text-white p-4 rounded-lg dark:text-white"
 						to={"/create-listing"}
 					>
 						Create Listing

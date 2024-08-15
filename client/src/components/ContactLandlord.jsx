@@ -1,9 +1,11 @@
 import { useRef, useState } from "react";
+import { useSelector } from "react-redux";
 
 const ContactLandlord = (listingDetails) => {
   const messageRef = useRef();
   const listingDetail = listingDetails.listingDetails;
   const [isContacted, setIsContacted] = useState(false);
+  const { currentUser } = useSelector((state) => state.user);
 
   const hasSpecialCharacters = (str) => {
     const pattern = /[^a-zA-Z0-9\s]/;
@@ -30,7 +32,7 @@ const ContactLandlord = (listingDetails) => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify({ message, email: listingDetail.contactEmail }),
+        body: JSON.stringify({ message, email: currentUser.email }),
       });
 
       if (response.ok) {
@@ -68,7 +70,7 @@ const ContactLandlord = (listingDetails) => {
               className="block p-2.5 w-full text-sm text-gray-900 bg-gray-50 rounded-lg border border-gray-300 my-2.5 flex-grow"
               required
             ></textarea>
-            <input type="hidden" name="email" value={listingDetails.email} />
+            <input type="hidden" name="email" value={currentUser.email} />
             <input
               type="submit"
               className="text-white w-full bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
