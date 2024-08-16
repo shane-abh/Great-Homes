@@ -244,7 +244,7 @@ const MortgageCalculator = (calculatorData) => {
 
           {mortgageData ? (
             <div id="results" className=" p-4 md:col-span-2 mt-8  rounded-lg">
-              <h1 className="text-center font-bold text-2xl mb-8">
+              <h1 className="text-center font-bold text-2xl mb-8 dark:text-white">
                 Standard Amortization
               </h1>
               <div className="grid grid-rows-2  ">

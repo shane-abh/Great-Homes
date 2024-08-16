@@ -304,10 +304,11 @@ export const contactLandlord = async (req, res, next) => {
           ${message}
         </p>
         <br/>
-        <p>Best regards,<br />
-        Great Homes</p>
+        
 
       </div>
+      <p>Best regards,<br />
+        Great Homes</p>
     </body>
     </html>
       

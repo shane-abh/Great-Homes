@@ -4,7 +4,7 @@ import Logo from "./Logo";
 
 const Footer = () => {
 	return (
-		<footer className="bg-primary shadow dark:bg-black dark:border-t-2">
+		<footer className="bg-primary shadow dark:bg-dark-mode dark:border-t-2">
 			<div className="w-full max-w-screen-xl mx-auto p-4 md:py-8">
 				<div className="sm:flex sm:items-center sm:justify-between">
 					{/* <img className="w-24" src={footerLogo} alt="Great Homes" /> */}
