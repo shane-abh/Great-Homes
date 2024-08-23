@@ -200,38 +200,7 @@ const MortgageCalculator = (calculatorData) => {
                   />
                 </div>
               </div>
-              <div className="bg-slate-100  p-4 mb-2 shadow-md flex flex-col font-semibold rounded-md">
-                <div className="flex flex-col">
-                  <label className="my-2" htmlFor="extraPayment">
-                    Extra Payment Amount
-                  </label>
-                  <input
-                    className="px-3 py-2 border text-slate-500 font-normal rounded outline-none focus:border-blue-500"
-                    type="number"
-                    id="extraPayment"
-                    name="extraPayment"
-                    placeholder="$2,000"
-                    min={0}
-                    value={formData.extraPayment}
-                    onChange={handleChange}
-                  />
-                </div>
-                <div className="flex flex-col">
-                  <label className="my-2" htmlFor="extraPaymentIntervalYears">
-                    Extra Payment Interval (in years)
-                  </label>
-                  <input
-                    className="px-3 py-2 border text-slate-500 font-normal rounded outline-none focus:border-blue-500"
-                    type="number"
-                    id="extraPaymentIntervalYears"
-                    name="extraPaymentIntervalYears"
-                    placeholder="2"
-                    min={0}
-                    value={formData.extraPaymentIntervalYears}
-                    onChange={handleChange}
-                  />
-                </div>
-              </div>
+             
 
               <button
                 type="submit"

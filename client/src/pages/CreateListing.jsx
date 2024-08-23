@@ -35,6 +35,7 @@ export default function CreateListing() {
   console.log(formData);
 
   const handleImageSubmit = (e) => {
+    e.preventDefault();
     if (files.length > 0 && files.length + formData.imageUrls.length < 7) {
       setUploading(true);
       setImageUploadError(false);
@@ -55,6 +56,7 @@ export default function CreateListing() {
         .catch((err) => {
           setImageUploadError("Image upload failed (2 mb max per image)");
           setUploading(false);
+          setError(err);
         });
     } else {
       setImageUploadError("You can only upload 6 images per listing");
@@ -156,31 +158,12 @@ export default function CreateListing() {
     }
   };
 
-  const handleSubmit2 = async (e) => {
-    e.preventDefault();
-    const res = await fetch("/api/listing/create", {
-      method: "post",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        ...formData2,
-        userRef: currentUser._id,
-      }),
-    });
-    const data = await res.json();
-    setLoading(false);
-    if (data.success === false) {
-      setError(data.message);
-    }
-  };
-
   return (
     <main className="p-3 max-w-4xl mx-auto">
       <h1 className="text-3xl font-semibold text-center my-7">
         Create a Listing
       </h1>
-      <button onClick={handleSubmit2} className="p-4 bg-blue-400">Try me</button>
+
       <form onSubmit={handleSubmit} className="flex flex-col sm:flex-row gap-4">
         <div className="flex flex-col gap-4 flex-1">
           <input
