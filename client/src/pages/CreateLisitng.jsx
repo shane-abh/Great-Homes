@@ -192,9 +192,7 @@ export const CreateLisitng = () => {
         contactEmail: currentUser.email,
       }),
     });
-    const data2 = await res.json();
-
-    console.log(data2);
+    const data2 = await res.json();   
     navigate(`/listing/${data2._id}`);
   }
 

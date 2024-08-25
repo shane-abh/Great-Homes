@@ -47,7 +47,7 @@ export const Listing = () => {
         setListing(data);
         setLoading(false);
         setError(false);
-        console.log(data);
+       
       } catch (error) {
         setError(true);
         setLoading(false);

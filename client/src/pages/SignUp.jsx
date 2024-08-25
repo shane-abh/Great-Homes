@@ -31,7 +31,7 @@ export default function SignUp() {
 			body: JSON.stringify(formData),
 		});
 
-		console.log(signUpAPIResponse);
+	
 
 		if (signUpAPIResponse.status == 201) {
 			const serverResult = await signUpAPIResponse.json();

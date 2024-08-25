@@ -49,7 +49,7 @@ export const UpdateLisitng = () => {
       const res = await fetch(`/api/listing/get/${listingId}`);
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
+        console.error(data.message);
         return;
       }
       setData(data);
@@ -91,7 +91,6 @@ export const UpdateLisitng = () => {
     if (data2.success === false) {
       alert(data2.message);
     }
-    console.log(data2);
     navigate(`/listing/${data2._id}`);
   }
 

@@ -23,7 +23,6 @@ const WishlistButton = (wishlistDetails) => {
   }, [userId, listingId]);
 
   const toggleWishlist = async () => {
-    console.log(listingId, userId)
     try {
       const endpoint = isInWishlist ? 'remove' : 'add';
       const response = await fetch(`/api/wishlist/${endpoint}`, {

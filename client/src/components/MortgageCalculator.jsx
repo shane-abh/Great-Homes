@@ -19,8 +19,6 @@ const MortgageCalculator = (calculatorData) => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    console.log("Form Data:", formData);
-
     fetchData();
   };
 
@@ -56,7 +54,7 @@ const MortgageCalculator = (calculatorData) => {
         body: JSON.stringify(formData),
       });
       const data = await res.json();
-      console.log(data);
+
       setMortgageData(data);
 
       donutChartPoints.push(
@@ -200,7 +198,6 @@ const MortgageCalculator = (calculatorData) => {
                   />
                 </div>
               </div>
-             
 
               <button
                 type="submit"

@@ -7,8 +7,7 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 export const AmortizationChart = (amoritizationData) => {
   const chart = useRef(null);
   // const [chartData, setChartData] = useState({});
-  console.log(amoritizationData);
-  console.log(amoritizationData.amoritizationData.standardAmortization);
+ 
   const [amortizationData, setAmortizationData] = useState({
     standard: {
       interestPayment: [],
@@ -23,7 +22,7 @@ export const AmortizationChart = (amoritizationData) => {
   });
 
   const processData = (amortization) => {
-    console.log(amortization);
+   
     const interestPayment = amortization.amortizationSchedule.map((item) => ({
       x: new Date(item.year, parseInt(item.month % 12)),
       y: parseFloat(item.interestPayment),

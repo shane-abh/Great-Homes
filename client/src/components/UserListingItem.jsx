@@ -11,7 +11,7 @@ export default function UserListingItem(listingDetails) {
       });
       const data = await res.json();
       if (data.success === false) {
-        console.log(data.message);
+        console.error(data.message);
         return;
       }
 
@@ -19,7 +19,7 @@ export default function UserListingItem(listingDetails) {
         prev.filter((listing) => listing._id !== listingId)
       );
     } catch (error) {
-      console.log(error.message);
+      console.error(error.message);
     }
   };
   return (

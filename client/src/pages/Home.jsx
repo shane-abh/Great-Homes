@@ -28,7 +28,7 @@ const Home = () => {
 				setOfferListings(data);
 				fetchRentListings();
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		};
 		const fetchRentListings = async () => {
@@ -38,7 +38,7 @@ const Home = () => {
 				setRentListings(data);
 				fetchSaleListings();
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		};
 
@@ -48,7 +48,7 @@ const Home = () => {
 				const data = await res.json();
 				setSaleListings(data);
 			} catch (error) {
-				console.log(error);
+				console.error(error);
 			}
 		};
 		fetchOfferListings();

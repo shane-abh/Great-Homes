@@ -6,11 +6,7 @@ const CanvasJSChart = CanvasJSReact.CanvasJSChart;
 const MortgageDonutChart = (chartData) => {
   const { dataPoints } = chartData;
   const chartContainerRef = useRef(null);
-  //   let dataPoints = [
-  //     { y: 377000, label: "Principal" },
-  //     { y: 5000, label: "Insurance" },
-  //   ];
-  console.log(dataPoints);
+ 
 
   const options = {
     animationEnabled: true,
