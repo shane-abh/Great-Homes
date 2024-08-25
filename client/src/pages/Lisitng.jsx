@@ -100,7 +100,7 @@ export const Listing = () => {
               <div className="dark:text-white">
                 <TabList>
                   <Tab>Details</Tab>
-                  <Tab>Mortgage Calculator</Tab>
+                  { listing.type === "Sale" ? <Tab>Mortgage Calculator</Tab> : ""}
                 </TabList>
               </div>
 
