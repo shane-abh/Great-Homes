@@ -40,6 +40,10 @@ app.use('/api/listing', listingRouter);
 app.use('/api/wishlist', wishlistRouter)
 app.use('/api/contactLandlord', contactLandlordRouter)
 
+app.get('/', (req,res) => {
+  res.send("Hello");
+})
+
 const corsConfig = {
   origin: '',
   credentials: true,
