@@ -40,7 +40,7 @@ app.use('/api/listing', listingRouter);
 app.use('/api/wishlist', wishlistRouter)
 app.use('/api/contactLandlord', contactLandlordRouter)
 
-app.get('/', (req,res) => {
+app.get('/api', (req,res) => {
   res.send("Hello");
 })
 
